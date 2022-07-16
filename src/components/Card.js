@@ -1,13 +1,20 @@
 import UserRating from "./UserRating";
+import styles from "./styles/Card.module.css";
 
 function Card({ item, addToCart }) {
   return (
-    <div className="card">
-      <img src={item.image} alt={item.title} />
-      <h3>{item.title}</h3>
-      <UserRating rating={item.rating.rate} count={item.rating.count} />
-      <p>${item.price}</p>
-      <button type="button" onClick={addToCart}>Add to cart</button>
+    <div className={styles.card}>
+      <div className={styles.upper}>
+        <img src={item.image} alt={item.title} className={styles.productImage} />
+        <h3>{item.title}</h3>
+      </div>
+      <div className={styles.lower}>
+        <div className={styles.itemInfo}>
+          <UserRating rating={item.rating.rate} count={item.rating.count} />
+          <p className={styles.price}>${item.price}</p>
+        </div>
+        <button type="button" onClick={addToCart}>Add to cart</button>
+      </div>
     </div>
   );
 }

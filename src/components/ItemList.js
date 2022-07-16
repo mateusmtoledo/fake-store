@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Card from "./Card";
+import styles from "./styles/ItemList.module.css";
 
 function ItemList({ itemArray, addToCart }) {
   const [ currentPage, setCurrentPage ] = useState(1);
@@ -20,15 +21,15 @@ function ItemList({ itemArray, addToCart }) {
   }
 
   return (
-    <div className="item-list">
-      <div className="items">
+    <div className={styles.itemList}>
+      <div className={styles.products}>
         { 
           itemArray
             .slice(startIndex, endIndex)
             .map((item) => <Card key={item.id} item={item} addToCart={addToCart} />)
         }
       </div>
-      <div className="items-navigation">
+      <div className={styles.navigation}>
         <button type="button" onClick={previousPage}>{'<'}</button>
         <p>Page {currentPage} of {numberOfPages}</p>
         <button type="button" onClick={nextPage}>{'>'}</button>

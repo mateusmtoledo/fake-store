@@ -1,6 +1,7 @@
-import fullStarIcon from '../icons/full-star.svg';
-import halfStarIcon from '../icons/half-star.svg';
-import emptyStarIcon from '../icons/empty-star.svg';
+import fullStarIcon from "../icons/full-star.svg";
+import halfStarIcon from "../icons/half-star.svg";
+import emptyStarIcon from "../icons/empty-star.svg";
+import styles from "./styles/UserRating.module.css";
 
 const starIcons = {
   full: {
@@ -34,15 +35,15 @@ function UserRating({ rating, count }) {
 
 
   return (
-    <div className="user-rating">
-      <div className="star-rating">
+    <div>
+      <div>
         {
           stars.map((star, index) => (
-            <img key={index} src={star.src} alt={star.alt} />
+            <img className={styles.star} key={index} src={star.src} alt={star.alt} />
           ))
         }
       </div>
-      <div>{rating} / 5 ({count})</div>
+      <p className={styles.rating}>{rating} / 5 ({count})</p>
     </div>
   );
 }

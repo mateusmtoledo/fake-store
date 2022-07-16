@@ -1,10 +1,28 @@
-import './App.css';
+import { useEffect, useState } from 'react';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import ItemList from './components/ItemList';
 
 function App() {
-  return (
-    <div>
+  const [ itemArray, setItemArray ] = useState([]);
 
-    </div>
+  useEffect(() => {
+    async function fetchItems() {
+      const reponse = await fetch('https://fakestoreapi.com/products');
+      const json = await reponse.json();
+      setItemArray(json);
+    }
+    fetchItems();
+  });
+
+  return (
+    <>
+      <Header />
+      <main>
+        <ItemList itemArray={itemArray} />
+      </main>
+      <Footer />
+    </>
   );
 }
 
