@@ -29,6 +29,12 @@ describe('card', () => {
     expect(title).toBeInTheDocument();
   });
 
+  it('renders user ratings', () => {
+    render(<Card item={fakeItem} addToCart={addToCart} />);
+    const ratingText = screen.getByText(/3.9 \/ 5/);
+    expect(ratingText).toBeInTheDocument();
+  });
+
   it('renders item price', () => {
     render(<Card item={fakeItem} addToCart={addToCart} />);
     const price = screen.getByText('$109.95');
