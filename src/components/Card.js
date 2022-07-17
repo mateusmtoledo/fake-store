@@ -11,7 +11,7 @@ function Card({ item, addToCart }) {
       <div className={styles.lower}>
         <div className={styles.itemInfo}>
           <UserRating rating={item.rating.rate} count={item.rating.count} />
-          <p className={styles.price}>${item.price}</p>
+          <p className={styles.price}>${item.price.toFixed(2)}</p>
         </div>
         <button type="button" onClick={addToCart}>Add to cart</button>
       </div>
