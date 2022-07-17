@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "./Card";
 import styles from "./styles/ItemList.module.css";
 
-export const itemsPerPage = 9;
+export const itemsPerPage = 12;
 
 function ItemList({ itemArray, addToCart }) {
   const [ currentPage, setCurrentPage ] = useState(1);
