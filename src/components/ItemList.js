@@ -2,10 +2,11 @@ import { useState } from "react";
 import Card from "./Card";
 import styles from "./styles/ItemList.module.css";
 
+export const itemsPerPage = 9;
+
 function ItemList({ itemArray, addToCart }) {
   const [ currentPage, setCurrentPage ] = useState(1);
   
-  const itemsPerPage = 9;
   const numberOfPages = Math.ceil(itemArray.length / itemsPerPage);
   const startIndex = itemsPerPage * (currentPage - 1);
   const endIndex = itemsPerPage * (currentPage);
