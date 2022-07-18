@@ -21,10 +21,7 @@ function RouteSwitch() {
     if(cartItems.some((item) => item.product.id === productId)) return;
     else {
       const product = itemArray.find((product) => product.id === productId);
-      cartItems.push({
-        product,
-        quantity: 1,
-      });
+      setCartItems([...cartItems, { product, quantity: 1 }]);
     }
   }
 
