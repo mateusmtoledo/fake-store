@@ -17,11 +17,22 @@ function RouteSwitch() {
     fetchItems();
   });
 
+  function addToCart(productId) {
+    if(cartItems.some((item) => item.product.id === productId)) return;
+    else {
+      const product = itemArray.find((product) => product.id === productId);
+      cartItems.push({
+        product,
+        quantity: 1,
+      });
+    }
+  }
+
   return(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="shop" element={<ItemList itemArray={itemArray} />} />
+          <Route path="shop" element={<ItemList itemArray={itemArray} addToCart={addToCart} />} />
           <Route path="cart" element={<Cart cartItems={cartItems} />} />
         </Route>
       </Routes>

@@ -27,7 +27,7 @@ function ItemList({ itemArray, addToCart }) {
         { 
           itemArray
             .slice(startIndex, endIndex)
-            .map((item) => <Card key={item.id} item={item} addToCart={addToCart} />)
+            .map((item) => <Card key={item.id} item={item} addToCart={() => addToCart(item.id)} />)
         }
       </div>
       <div className={styles.navigation}>

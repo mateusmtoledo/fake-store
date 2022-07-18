@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Cart from '../Cart';
+import { MemoryRouter } from "react-router-dom";
 
 jest.mock('../CartItem', () => () => (
   <div>{'This is a fake cart item'}</div>
@@ -27,26 +28,42 @@ for(let i = 0; i < 5; i += 1) {
 
 describe('cart', () => {
   it('renders every cart item', () => {
-    render(<Cart cartItems={cartItems} />);
+    render(
+      <MemoryRouter>
+        <Cart cartItems={cartItems} />
+      </MemoryRouter>
+    );
     const renderedItems = screen.getAllByText('This is a fake cart item');
     expect(renderedItems.length).toBe(cartItems.length);
   });
 
   it('displays correct total order value', () => {
-    render(<Cart cartItems={cartItems} />);
+    render(
+      <MemoryRouter>
+        <Cart cartItems={cartItems} />
+      </MemoryRouter>
+    );
     const totalPriceElement = screen.getByText(/order total/i);
     expect(totalPriceElement).toBeInTheDocument();
     expect(totalPriceElement).toHaveTextContent(`$${totalValue}`);
   });
 
   it('renders checkout button', () => {
-    render(<Cart cartItems={cartItems} />);
+    render(
+      <MemoryRouter>
+        <Cart cartItems={cartItems} />
+      </MemoryRouter>
+    );
     const checkoutButton = screen.getByText(/checkout/i);
     expect(checkoutButton).toBeInTheDocument();
   });
 
   it('renders continue shopping button', () => {
-    render(<Cart cartItems={cartItems} />);
+    render(
+      <MemoryRouter>
+        <Cart cartItems={cartItems} />
+      </MemoryRouter>
+    );
     const continueShoppingButton = screen.getByText(/continue shopping/i);
     expect(continueShoppingButton).toBeInTheDocument();
   });
