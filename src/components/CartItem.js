@@ -7,7 +7,7 @@ function CartItem({ item, updateQuantity }) {
         <img src={product.image} alt={product.title}></img>
         <div>
           <h3>{product.title}</h3>
-          <p>Price per unit: {product.price}</p>
+          <p>Price per unit: {product.price.toFixed(2)}</p>
         </div>
       </div>
       <form>
@@ -18,7 +18,7 @@ function CartItem({ item, updateQuantity }) {
       </form>
       <div>
         <p>Total:</p>
-        <p title="Total item cost">${product.price * quantity}</p>
+        <p title="Total item cost">${(product.price * quantity).toFixed(2)}</p>
       </div>
     </div>
   );
