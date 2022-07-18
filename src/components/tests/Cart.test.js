@@ -64,4 +64,14 @@ describe('cart', () => {
     const continueShoppingButton = screen.getByText(/continue shopping/i);
     expect(continueShoppingButton).toBeInTheDocument();
   });
+
+  it('renders message when cart is empty', () => {
+    render(
+      <MemoryRouter>
+        <Cart cartItems={[]} />
+      </MemoryRouter>
+    );
+    const emptyCartMessage = screen.getByText(/your cart is empty/i);
+    expect(emptyCartMessage).toBeInTheDocument();
+  });
 });

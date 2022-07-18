@@ -1,6 +1,7 @@
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
 import styles from "./styles/Cart.module.css";
+import emptyCartImage from "../images/empty-cart.svg";
 
 function Cart({ cartItems, updateQuantity }) {
   function calculateTotal() {
@@ -13,13 +14,23 @@ function Cart({ cartItems, updateQuantity }) {
       <div className={styles.items}>
         <h2>Cart</h2>
         {
-          cartItems
-            .map((item) =>
-              <CartItem
-                key={item.product.id}
-                item={item}
-                updateQuantity={(event) => updateQuantity(item.product.id, event)}
-              />)
+          cartItems.length
+          ? cartItems
+              .map((item) =>
+                <CartItem
+                  key={item.product.id}
+                  item={item}
+                  updateQuantity={(event) => updateQuantity(item.product.id, event)}
+                />
+              )
+          : <div className={styles.emptyCart}>
+              <img src={emptyCartImage} alt="Empty cart" />
+              <div className={styles.emptyCartText}>
+                <h3>Oops...</h3>
+                <p>Your cart is empty.</p>
+                <p>Click <strong><Link to="/shop">here</Link></strong> to start shopping!</p>
+              </div>
+            </div>
         }
       </div>
       <div className={styles.checkout}>

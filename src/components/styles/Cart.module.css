@@ -4,6 +4,11 @@
   justify-content: center;
 }
 
+.cart a {
+  text-decoration: none;
+  color: black;
+}
+
 .cart h2 {
   font-size: 1.6rem;
 }
@@ -34,10 +39,6 @@
   border: none;
 }
 
-.checkout a {
-  text-decoration: none;
-}
-
 .orderTotal {
   display: flex;
   flex-direction: column;
@@ -46,4 +47,21 @@
 .totalPrice {
   font-size: 2.5rem;
   text-align: end;
+}
+
+.emptyCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 64px;
+}
+
+.emptyCart img {
+  max-width: 250px;
+}
+
+.emptyCart h3 {
+  font-size: 2rem;
+  margin-bottom: 8px;
 }
