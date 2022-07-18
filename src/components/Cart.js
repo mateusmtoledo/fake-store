@@ -1,5 +1,6 @@
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
+import styles from "./styles/Cart.module.css";
 
 function Cart({ cartItems, updateQuantity }) {
   function calculateTotal() {
@@ -8,8 +9,9 @@ function Cart({ cartItems, updateQuantity }) {
   }
 
   return (
-    <div>
-      <div>
+    <div className={styles.cart}>
+      <div className={styles.items}>
+        <h2>Cart</h2>
         {
           cartItems
             .map((item) =>
@@ -20,8 +22,11 @@ function Cart({ cartItems, updateQuantity }) {
               />)
         }
       </div>
-      <div>
-        <p>Order Total: ${calculateTotal().toFixed(2)}</p>
+      <div className={styles.checkout}>
+        <div className={styles.orderTotal}>
+          <p>Order Total:</p>
+          <p className={styles.totalPrice}>${calculateTotal().toFixed(2)}</p>
+        </div>
         <button>Go to checkout</button>
         <Link to="/shop">
           <button>Continue shopping</button>

@@ -7,3 +7,15 @@
   margin: 0;
   padding: 0;
 }
+
+main {
+  padding: 16px;
+  flex: 1;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

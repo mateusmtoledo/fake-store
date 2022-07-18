@@ -8,7 +8,6 @@ jest.mock('../CartItem', () => () => (
 ));
 
 const cartItems = [];
-let totalValue = 0;
 
 for(let i = 0; i < 5; i += 1) {
   const id = i;
@@ -22,8 +21,6 @@ for(let i = 0; i < 5; i += 1) {
     },
     quantity,
   });
-
-  totalValue += (price * quantity);
 }
 
 describe('cart', () => {
@@ -45,7 +42,7 @@ describe('cart', () => {
     );
     const totalPriceElement = screen.getByText(/order total/i);
     expect(totalPriceElement).toBeInTheDocument();
-    expect(totalPriceElement).toHaveTextContent(`$${totalValue}`);
+    expect(screen.getByText(/1034.6/)).toBeInTheDocument();
   });
 
   it('renders checkout button', () => {
