@@ -25,12 +25,20 @@ function RouteSwitch() {
     }
   }
 
+  function updateQuantity(productId, event) {
+    const index = cartItems.findIndex((item) => item.product.id === productId);
+    const newItem = { ...cartItems[index], quantity: event.target.value };
+    const newArray = [ ...cartItems ];
+    newArray[index] = newItem;
+    setCartItems(newArray);
+  }
+
   return(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="shop" element={<ItemList itemArray={itemArray} addToCart={addToCart} />} />
-          <Route path="cart" element={<Cart cartItems={cartItems} />} />
+          <Route path="cart" element={<Cart cartItems={cartItems} updateQuantity={updateQuantity} />} />
         </Route>
       </Routes>
     </BrowserRouter>

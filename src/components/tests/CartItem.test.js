@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CartItem from '../CartItem';
+import userEvent from "@testing-library/user-event";
 
 const fakeCartItem = {
   product: {
@@ -15,34 +16,44 @@ const fakeCartItem = {
   quantity: 3,
 }
 
+const updateQuantity = jest.fn();
+
 describe('CartItem', () => {
   it('renders an image of the product', () => {
-    render(<CartItem item={fakeCartItem} />);
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
     const image = screen.getByRole('img');
     expect(image.src).toBe(fakeCartItem.product.image);
   });
 
   it('renders the product title', () => {
-    render(<CartItem item={fakeCartItem} />);
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
     const title = screen.getByText(fakeCartItem.product.title);
     expect(title).toBeInTheDocument();
   });
   
   it('renders the product price', () => {
-    render(<CartItem item={fakeCartItem} />);
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
     const price = screen.getByText(/price per unit/i);
     expect(price).toHaveTextContent(fakeCartItem.product.price);
   });
 
   it('renders the item quantity', () => {
-    render(<CartItem item={fakeCartItem} />);
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
     const quantity = screen.getByLabelText(/quantity/i);
     expect(quantity.value).toBe(fakeCartItem.quantity.toString());
   });
 
   it('renders total value', () => {
-    render(<CartItem item={fakeCartItem} />);
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
     const totalPrice = screen.getByTitle(/total item cost/i);
     expect(totalPrice).toHaveTextContent(fakeCartItem.product.price * fakeCartItem.quantity);
+  });
+
+  it('correctly updates the input', () => {
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
+    const quantityInput = screen.getByRole('spinbutton');
+    userEvent.type(quantityInput, "3");
+    expect(updateQuantity).toHaveBeenCalled();
+    expect(quantityInput.value).toBe("3");
   });
 });

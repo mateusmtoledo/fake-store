@@ -1,4 +1,4 @@
-function CartItem({ item }) {
+function CartItem({ item, updateQuantity }) {
   const { product, quantity } = item;
 
   return (
@@ -10,12 +10,12 @@ function CartItem({ item }) {
           <p>Price per unit: {product.price}</p>
         </div>
       </div>
-      <div>
+      <form>
         <label>
           <span>Quantity:</span>
-          <input type="number" min="1" max="100" value={quantity} />
+          <input type="number" min="1" max="100" onChange={updateQuantity} value={quantity} />
         </label>
-      </div>
+      </form>
       <div>
         <p>Total:</p>
         <p title="Total item cost">${product.price * quantity}</p>
