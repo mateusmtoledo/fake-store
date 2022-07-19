@@ -1,6 +1,7 @@
 import styles from "./styles/CartItem.module.css";
+import removeIcon from "../icons/remove.svg";
 
-function CartItem({ item, updateQuantity }) {
+function CartItem({ item, updateQuantity, removeFromCart }) {
   const { product, quantity } = item;
 
   return (
@@ -17,6 +18,10 @@ function CartItem({ item, updateQuantity }) {
           <span>Quantity:</span>
           <input type="number" min="1" max="100" onChange={updateQuantity} value={quantity} />
         </label>
+        <button className={styles.removeFromCart} onClick={removeFromCart}>
+          <img src={removeIcon} alt="Remove item from cart" />
+          <p>Remove</p>
+        </button>
       </div>
       <div className={styles.cost}>
         <p>Total:</p>

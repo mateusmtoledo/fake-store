@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles/Cart.module.css";
 import emptyCartImage from "../images/empty-cart.svg";
 
-function Cart({ cartItems, updateQuantity }) {
+function Cart({ cartItems, updateQuantity, removeFromCart }) {
   function calculateTotal() {
     return cartItems
         .reduce((previous, current) => previous + current.product.price * current.quantity, 0);
@@ -21,6 +21,7 @@ function Cart({ cartItems, updateQuantity }) {
                   key={item.product.id}
                   item={item}
                   updateQuantity={(event) => updateQuantity(item.product.id, event)}
+                  removeFromCart={() => removeFromCart(item.product.id)}
                 />
               )
           : <div className={styles.emptyCart}>

@@ -25,6 +25,11 @@ function RouteSwitch() {
     }
   }
 
+  function removeFromCart(productId) {
+    const newArr = cartItems.filter((item) => item.product.id !== productId);
+    setCartItems(newArr);
+  }
+
   function updateQuantity(productId, event) {
     const index = cartItems.findIndex((item) => item.product.id === productId);
     const newItem = { ...cartItems[index], quantity: event.target.value };
@@ -38,7 +43,7 @@ function RouteSwitch() {
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="shop" element={<ItemList itemArray={itemArray} addToCart={addToCart} />} />
-          <Route path="cart" element={<Cart cartItems={cartItems} updateQuantity={updateQuantity} />} />
+          <Route path="cart" element={<Cart cartItems={cartItems} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />} />
         </Route>
       </Routes>
     </BrowserRouter>

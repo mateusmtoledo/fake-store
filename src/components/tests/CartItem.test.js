@@ -16,12 +16,13 @@ const fakeCartItem = {
   quantity: 3,
 }
 
+const removeFromCart = jest.fn();
 const updateQuantity = jest.fn();
 
 describe('CartItem', () => {
   it('renders an image of the product', () => {
     render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} />);
-    const image = screen.getByRole('img');
+    const image = screen.getByAltText(fakeCartItem.product.title);
     expect(image.src).toBe(fakeCartItem.product.image);
   });
 
@@ -55,5 +56,14 @@ describe('CartItem', () => {
     userEvent.type(quantityInput, "3");
     expect(updateQuantity).toHaveBeenCalled();
     expect(quantityInput.value).toBe("3");
+  });
+});
+
+describe('remove button', () => {
+  it('calls the removeFromCart function', () => {
+    render(<CartItem item={fakeCartItem} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />);
+    const removeButton = screen.getByText(/remove/i);
+    userEvent.click(removeButton);
+    expect(removeFromCart).toHaveBeenCalled();
   });
 });
