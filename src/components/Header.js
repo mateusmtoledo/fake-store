@@ -6,9 +6,17 @@ function Header() {
   return(
     <header className={styles.header}>
       <h1>my store</h1>
-      <Link to="/cart">
-        <img src={cartIcon} alt="Go to cart" />
-      </Link>
+      <nav>
+        <Link to="/">
+          <p>Home</p>
+        </Link>
+        <Link to="/shop">
+          <p>Shop</p>
+        </Link>
+        <Link to="/cart">
+          <img src={cartIcon} alt="Go to cart" />
+        </Link>
+      </nav>
     </header>
   );
 }
