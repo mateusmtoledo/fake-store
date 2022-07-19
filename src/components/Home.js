@@ -7,7 +7,7 @@ function Home() {
     <div className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.heroText}>
-          <p>stuff that you</p>
+          <p>stuff you</p>
           <p><strong>really</strong></p>
           <p>need.</p>
         </div>
