@@ -39,9 +39,9 @@ function Cart({ cartItems, updateQuantity, removeFromCart }) {
           <p>Order Total:</p>
           <p className={styles.totalPrice}>${calculateTotal().toFixed(2)}</p>
         </div>
-        <button>Go to checkout</button>
+        <button className={styles.goToCheckout}>Go to checkout</button>
         <Link to="/shop">
-          <button>Continue shopping</button>
+          <button className={styles.continueShopping}>Continue shopping</button>
         </Link>
       </div>
     </div>
