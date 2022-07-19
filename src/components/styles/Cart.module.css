@@ -19,6 +19,7 @@
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 32px 64px;
+  background-color: white;
 }
 
 .checkout {
@@ -26,6 +27,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: max-content;
   width: 300px;
+  background-color: white;
 }
 
 .checkout button {
@@ -35,7 +37,7 @@
   padding: 12px;
   font-size: 1.2rem;
   color: white;
-  background-color: black;
+  background-color: #393E46;
   border: none;
 }
 
