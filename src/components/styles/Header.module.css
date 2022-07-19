@@ -19,3 +19,24 @@
   font-weight: 700;
   font-size: 1.2rem;
 }
+
+.goToCart {
+  position: relative;
+}
+
+.numberOfCartItems {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  border-radius: 32px;
+  background-color: #2E8B57EE;
+  color: white;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 0.8rem;
+}

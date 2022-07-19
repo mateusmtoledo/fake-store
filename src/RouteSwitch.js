@@ -7,7 +7,6 @@ import Home from "./components/Home";
 
 function RouteSwitch() {
   const [ itemArray, setItemArray ] = useState([]);
-  const [ cartItems, setCartItems ] = useState([]);
 
   useEffect(() => {
     async function fetchItems() {
@@ -17,6 +16,8 @@ function RouteSwitch() {
     }
     fetchItems();
   });
+
+  const [ cartItems, setCartItems ] = useState([]);
 
   function addToCart(productId) {
     if(cartItems.some((item) => item.product.id === productId)) return;
@@ -42,7 +43,7 @@ function RouteSwitch() {
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
+        <Route path="/" element={<App numberOfCartItems={cartItems.length} />}>
           <Route path="shop" element={<ItemList itemArray={itemArray} addToCart={addToCart} />} />
           <Route path="cart" element={<Cart cartItems={cartItems} updateQuantity={updateQuantity} removeFromCart={removeFromCart} />} />
           <Route index element={<Home />} />

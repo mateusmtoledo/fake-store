@@ -2,7 +2,7 @@ import styles from "./styles/Header.module.css";
 import { Link } from 'react-router-dom';
 import cartIcon from '../icons/cart.svg';
 
-function Header() {
+function Header({numberOfCartItems}) {
   return(
     <header className={styles.header}>
       <h1>my store</h1>
@@ -13,8 +13,9 @@ function Header() {
         <Link to="/shop">
           <p>Shop</p>
         </Link>
-        <Link to="/cart">
+        <Link className={styles.goToCart} to="/cart">
           <img src={cartIcon} alt="Go to cart" />
+          <p title="Number of items in the cart" className={styles.numberOfCartItems}>{numberOfCartItems}</p>
         </Link>
       </nav>
     </header>
