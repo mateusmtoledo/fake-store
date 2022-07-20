@@ -6,9 +6,9 @@ function CartItem({ item, updateQuantity, removeFromCart }) {
 
   return (
     <div className={styles.cartItem}>
-      <div className={styles.productDescription}>
+      <div className={styles.product}>
         <div className={styles.image}><img className={styles.productImage} src={product.image} alt={product.title}></img></div>
-        <div>
+        <div className={styles.description}>
           <h3>{product.title}</h3>
           <p className={styles.price}>Price per unit: ${product.price.toFixed(2)}</p>
         </div>

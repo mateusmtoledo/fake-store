@@ -1,9 +1,11 @@
 .cartItem {
-  display: flex;
-  gap: 32px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr min-content 100px;
+  column-gap: 16px;
   border-bottom: 1px solid gray;
   padding: 16px 0;
+  align-items: center;
+  text-align: center;
 }
 
 .cartItem:last-child {
@@ -36,11 +38,14 @@
   object-fit: scale-down;
 }
 
-.productDescription {
+.product {
   display: flex;
   align-items: center;
   gap: 16px;
-  flex: 1 1 300px;
+}
+
+.description {
+  flex: 1;
 }
 
 .quantity {
@@ -48,17 +53,12 @@
   flex-direction: column;
   gap: 8px;
   align-items: center;
-  flex: 0 0 min-content;
 }
 
 .quantity label {
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
-
-.cost {
-  flex: 0 0 100px;
 }
 
 .removeFromCart {
@@ -73,4 +73,15 @@
 
 .removeFromCart img {
   width: 16px;
+}
+
+@media (max-width: 860px) {
+  .cartItem {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 100px;
+  }
+
+  .product {
+    grid-column: span 2;
+  }
 }
