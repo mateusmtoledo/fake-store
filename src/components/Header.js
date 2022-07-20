@@ -5,7 +5,7 @@ import cartIcon from '../icons/cart.svg';
 function Header({numberOfCartItems}) {
   return(
     <header className={styles.header}>
-      <h1>my store</h1>
+      <h1>fake store</h1>
       <nav>
         <Link to="/">
           <p>Home</p>
