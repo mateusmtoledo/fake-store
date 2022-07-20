@@ -6,6 +6,7 @@
   align-items: center;
   gap: 32px;
   padding: 16px 8px 48px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .container {
@@ -49,4 +50,29 @@
   background: none;
   border: 2px solid black;
   border-radius: 32px;
+}
+
+.messages {
+  max-width: 800px;
+  margin: 64px auto;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  gap: 32px;
+  margin: 64px 8px;
+  padding: 32px 48px;
+  min-height: 300px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  border-radius: 8px;
+}
+
+.message h2 {
+  margin-bottom: 16px;
+}
+
+.message img {
+  max-width: 300px;
 }
