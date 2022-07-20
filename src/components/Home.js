@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import shoppingImage from "../images/shopping.png";
+import shoppingImage from "../images/shopping.svg";
 import styles from "./styles/Home.module.css";
 import productVarietyImage from "../images/product-variety.svg";
 import paymentMethodsImage from "../images/payment-methods.svg";
