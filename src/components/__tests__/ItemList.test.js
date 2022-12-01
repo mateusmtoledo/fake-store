@@ -3,20 +3,24 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import ItemList from '../ItemList';
 import { itemsPerPage } from '../ItemList';
-import products from '../../fakeData/products.json';
+import mockProducts from '../../fakeData/products.json';
 import { CartContext } from '../../contexts/CartContext';
 
 jest.mock('../Card', () => ({ item }) => (
   <div data-testid={item.id}>{'This is a card mock'}</div>
 ));
 
-const numberOfPages = Math.ceil(products.length / itemsPerPage);
+jest.mock('../../hooks/useProducts', () => () => ({
+  products: mockProducts,
+}));
+
+const numberOfPages = Math.ceil(mockProducts.length / itemsPerPage);
 
 describe('ItemList', () => {
   it('renders limited amount of items at a time', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const displayedItems = screen.getAllByText('This is a card mock');
@@ -26,7 +30,7 @@ describe('ItemList', () => {
   it('initially renders first page', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     for (let i = 1; i <= itemsPerPage; i += 1) {
@@ -37,7 +41,7 @@ describe('ItemList', () => {
   it('renders next page button', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const nextPageButton = screen.getByText('>');
@@ -47,7 +51,7 @@ describe('ItemList', () => {
   it('renders previous page button', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const previousPageButton = screen.getByText('<');
@@ -59,7 +63,7 @@ describe('page number display', () => {
   it('correctly displays page numbers', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const pageNumberDisplay = screen.getByText(/page/i);
@@ -74,7 +78,7 @@ describe('next page button', () => {
   it('renders next page when clicked', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const nextPageButton = screen.getByText('>');
@@ -84,7 +88,7 @@ describe('next page button', () => {
     userEvent.click(nextPageButton);
     for (
       let i = itemsPerPage + 1;
-      i < Math.min(itemsPerPage * 2, products.length);
+      i < Math.min(itemsPerPage * 2, mockProducts.length);
       i += 1
     ) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
@@ -94,7 +98,7 @@ describe('next page button', () => {
   it('does not go further than last page', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const nextPageButton = screen.getByText('>');
@@ -104,7 +108,7 @@ describe('next page button', () => {
     const expectedStartIndex = itemsPerPage * (numberOfPages - 1) + 1;
     const expectedEndIndex = Math.min(
       itemsPerPage * numberOfPages,
-      products.length,
+      mockProducts.length,
     );
     for (let i = expectedStartIndex; i < expectedEndIndex; i += 1) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
@@ -119,7 +123,7 @@ describe('previous page button', () => {
   it('renders previous page when clicked', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const previousPageButton = screen.getByText('<');
@@ -134,7 +138,7 @@ describe('previous page button', () => {
   it('does not go below first page', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
-        <ItemList products={products} />
+        <ItemList />
       </CartContext.Provider>,
     );
     const previousPageButton = screen.getByText('<');

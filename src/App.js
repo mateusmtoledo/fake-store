@@ -1,17 +1,15 @@
-import { Outlet } from 'react-router-dom';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import { CartContext } from './contexts/CartContext';
+import useCart from './hooks/useCart';
+import RouteHandler from './RouteHandler';
 
-function App() {
+export default function App() {
+  const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
+
   return (
-    <>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateQuantity }}
+    >
+      <RouteHandler />
+    </CartContext.Provider>
   );
 }
-
-export default App;

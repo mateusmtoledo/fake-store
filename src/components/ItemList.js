@@ -1,11 +1,13 @@
 import { useContext, useState } from 'react';
 import { CartContext } from '../contexts/CartContext';
+import useProducts from '../hooks/useProducts';
 import Card from './Card';
 import styles from './styles/ItemList.module.css';
 
 export const itemsPerPage = 12;
 
-function ItemList({ products }) {
+function ItemList() {
+  const { products } = useProducts();
   const { addToCart } = useContext(CartContext);
   const [currentPage, setCurrentPage] = useState(1);
 
