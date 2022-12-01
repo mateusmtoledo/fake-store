@@ -2,12 +2,13 @@ import { useContext, useState } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import useProducts from '../hooks/useProducts';
 import Card from './Card';
+import CardSkeleton from './CardSkeleton';
 import styles from './styles/ItemList.module.css';
 
 export const itemsPerPage = 12;
 
-function ItemList() {
-  const { products } = useProducts();
+export default function ItemList() {
+  const { products, productsLoading } = useProducts();
   const { addToCart } = useContext(CartContext);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -23,6 +24,18 @@ function ItemList() {
   function previousPage() {
     const newPage = Math.max(1, currentPage - 1);
     setCurrentPage(newPage);
+  }
+
+  if (productsLoading) {
+    return (
+      <div className={styles.itemList}>
+        <div className={styles.products}>
+          {new Array(9).fill().map((_, i) => (
+            <CardSkeleton key={i} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -46,5 +59,3 @@ function ItemList() {
     </div>
   );
 }
-
-export default ItemList;
