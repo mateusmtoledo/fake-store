@@ -1,44 +1,34 @@
-import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Cart from '../Cart';
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from 'react-router-dom';
 
-jest.mock('../CartItem', () => () => (
-  <div>{'This is a fake cart item'}</div>
-));
+jest.mock('../CartItem', () => () => <div>{'This is a fake cart item'}</div>);
 
-const cartItems = [];
-
-for(let i = 0; i < 5; i += 1) {
-  const id = i;
-  const price = 53.23 - i;
-  const quantity = 6 - i;
-
-  cartItems.push({
-    product: {
-      id,
-      price,
-    },
-    quantity,
-  });
-}
+const cart = new Array(5).fill().map((_, i) => ({
+  product: {
+    id: i,
+    price: 53.23 - i,
+  },
+  quantity: 6 - i,
+}));
 
 describe('cart', () => {
   it('renders every cart item', () => {
     render(
       <MemoryRouter>
-        <Cart cartItems={cartItems} />
-      </MemoryRouter>
+        <Cart cart={cart} />
+      </MemoryRouter>,
     );
     const renderedItems = screen.getAllByText('This is a fake cart item');
-    expect(renderedItems.length).toBe(cartItems.length);
+    expect(renderedItems.length).toBe(cart.length);
   });
 
   it('displays correct total order value', () => {
     render(
       <MemoryRouter>
-        <Cart cartItems={cartItems} />
-      </MemoryRouter>
+        <Cart cart={cart} />
+      </MemoryRouter>,
     );
     const totalPriceElement = screen.getByText(/order total/i);
     expect(totalPriceElement).toBeInTheDocument();
@@ -48,8 +38,8 @@ describe('cart', () => {
   it('renders checkout button', () => {
     render(
       <MemoryRouter>
-        <Cart cartItems={cartItems} />
-      </MemoryRouter>
+        <Cart cart={cart} />
+      </MemoryRouter>,
     );
     const checkoutButton = screen.getByText(/checkout/i);
     expect(checkoutButton).toBeInTheDocument();
@@ -58,8 +48,8 @@ describe('cart', () => {
   it('renders continue shopping button', () => {
     render(
       <MemoryRouter>
-        <Cart cartItems={cartItems} />
-      </MemoryRouter>
+        <Cart cart={cart} />
+      </MemoryRouter>,
     );
     const continueShoppingButton = screen.getByText(/continue shopping/i);
     expect(continueShoppingButton).toBeInTheDocument();
@@ -68,8 +58,8 @@ describe('cart', () => {
   it('renders message when cart is empty', () => {
     render(
       <MemoryRouter>
-        <Cart cartItems={[]} />
-      </MemoryRouter>
+        <Cart cart={[]} />
+      </MemoryRouter>,
     );
     const emptyCartMessage = screen.getByText(/your cart is empty/i);
     expect(emptyCartMessage).toBeInTheDocument();

@@ -1,38 +1,46 @@
-import CartItem from "./CartItem";
-import { Link } from "react-router-dom";
-import styles from "./styles/Cart.module.css";
-import emptyCartImage from "../images/empty-cart.svg";
+import CartItem from './CartItem';
+import { Link } from 'react-router-dom';
+import styles from './styles/Cart.module.css';
+import emptyCartImage from '../images/empty-cart.svg';
 
-function Cart({ cartItems, updateQuantity, removeFromCart }) {
+function Cart({ cart, updateQuantity, removeFromCart }) {
   function calculateTotal() {
-    return cartItems
-        .reduce((previous, current) => previous + current.product.price * current.quantity, 0);
+    return cart.reduce(
+      (previous, current) =>
+        previous + current.product.price * current.quantity,
+      0,
+    );
   }
 
   return (
     <div className={styles.cart}>
       <div className={styles.items}>
         <h2>Cart</h2>
-        {
-          cartItems.length
-          ? cartItems
-              .map((item) =>
-                <CartItem
-                  key={item.product.id}
-                  item={item}
-                  updateQuantity={(event) => updateQuantity(item.product.id, event)}
-                  removeFromCart={() => removeFromCart(item.product.id)}
-                />
-              )
-          : <div className={styles.emptyCart}>
-              <img src={emptyCartImage} alt="Empty cart" />
-              <div className={styles.emptyCartText}>
-                <h3>Oops...</h3>
-                <p>Your cart is empty.</p>
-                <p>Click <strong><Link to="/shop">here</Link></strong> to start shopping!</p>
-              </div>
+        {cart.length ? (
+          cart.map((item) => (
+            <CartItem
+              key={item.product.id}
+              item={item}
+              updateQuantity={updateQuantity}
+              removeFromCart={removeFromCart}
+            />
+          ))
+        ) : (
+          <div className={styles.emptyCart}>
+            <img src={emptyCartImage} alt="Empty cart" />
+            <div className={styles.emptyCartText}>
+              <h3>Oops...</h3>
+              <p>Your cart is empty.</p>
+              <p>
+                Click{' '}
+                <strong>
+                  <Link to="/shop">here</Link>
+                </strong>{' '}
+                to start shopping!
+              </p>
             </div>
-        }
+          </div>
+        )}
       </div>
       <div className={styles.checkout}>
         <div className={styles.orderTotal}>
