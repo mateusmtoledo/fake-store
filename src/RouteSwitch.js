@@ -5,6 +5,7 @@ import ItemList from './components/ItemList';
 import Home from './components/Home';
 import useCart from './hooks/useCart';
 import useProducts from './hooks/useProducts';
+import { CartContext } from './contexts/CartContext';
 
 function RouteSwitch() {
   const { products } = useProducts();
@@ -12,27 +13,19 @@ function RouteSwitch() {
   const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App numberOfCartItems={cart.length} />}>
-          <Route
-            path="shop"
-            element={<ItemList products={products} addToCart={addToCart} />}
-          />
-          <Route
-            path="cart"
-            element={
-              <Cart
-                cart={cart}
-                updateQuantity={updateQuantity}
-                removeFromCart={removeFromCart}
-              />
-            }
-          />
-          <Route index element={<Home />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateQuantity }}
+    >
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="shop" element={<ItemList products={products} />} />
+            <Route path="cart" element={<Cart />} />
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CartContext.Provider>
   );
 }
 

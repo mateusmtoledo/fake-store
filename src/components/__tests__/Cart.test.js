@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Cart from '../Cart';
 import { MemoryRouter } from 'react-router-dom';
+import { CartContext } from '../../contexts/CartContext';
 
 jest.mock('../CartItem', () => () => <div>{'This is a fake cart item'}</div>);
 
@@ -16,9 +17,13 @@ const cart = new Array(5).fill().map((_, i) => ({
 describe('cart', () => {
   it('renders every cart item', () => {
     render(
-      <MemoryRouter>
-        <Cart cart={cart} />
-      </MemoryRouter>,
+      <CartContext.Provider
+        value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
+      >
+        <MemoryRouter>
+          <Cart cart={cart} />
+        </MemoryRouter>
+      </CartContext.Provider>,
     );
     const renderedItems = screen.getAllByText('This is a fake cart item');
     expect(renderedItems.length).toBe(cart.length);
@@ -26,9 +31,13 @@ describe('cart', () => {
 
   it('displays correct total order value', () => {
     render(
-      <MemoryRouter>
-        <Cart cart={cart} />
-      </MemoryRouter>,
+      <CartContext.Provider
+        value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
+      >
+        <MemoryRouter>
+          <Cart cart={cart} />
+        </MemoryRouter>
+      </CartContext.Provider>,
     );
     const totalPriceElement = screen.getByText(/order total/i);
     expect(totalPriceElement).toBeInTheDocument();
@@ -37,9 +46,13 @@ describe('cart', () => {
 
   it('renders checkout button', () => {
     render(
-      <MemoryRouter>
-        <Cart cart={cart} />
-      </MemoryRouter>,
+      <CartContext.Provider
+        value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
+      >
+        <MemoryRouter>
+          <Cart cart={cart} />
+        </MemoryRouter>
+      </CartContext.Provider>,
     );
     const checkoutButton = screen.getByText(/checkout/i);
     expect(checkoutButton).toBeInTheDocument();
@@ -47,9 +60,13 @@ describe('cart', () => {
 
   it('renders continue shopping button', () => {
     render(
-      <MemoryRouter>
-        <Cart cart={cart} />
-      </MemoryRouter>,
+      <CartContext.Provider
+        value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
+      >
+        <MemoryRouter>
+          <Cart cart={cart} />
+        </MemoryRouter>
+      </CartContext.Provider>,
     );
     const continueShoppingButton = screen.getByText(/continue shopping/i);
     expect(continueShoppingButton).toBeInTheDocument();
@@ -57,9 +74,13 @@ describe('cart', () => {
 
   it('renders message when cart is empty', () => {
     render(
-      <MemoryRouter>
-        <Cart cart={[]} />
-      </MemoryRouter>,
+      <CartContext.Provider
+        value={{ cart: [], addToCard: jest.fn(), removeFromCart: jest.fn() }}
+      >
+        <MemoryRouter>
+          <Cart cart={cart} />
+        </MemoryRouter>
+      </CartContext.Provider>,
     );
     const emptyCartMessage = screen.getByText(/your cart is empty/i);
     expect(emptyCartMessage).toBeInTheDocument();

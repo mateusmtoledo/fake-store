@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CartContext } from '../contexts/CartContext';
 import Card from './Card';
 import styles from './styles/ItemList.module.css';
 
 export const itemsPerPage = 12;
 
-function ItemList({ products, addToCart }) {
+function ItemList({ products }) {
+  const { addToCart } = useContext(CartContext);
   const [currentPage, setCurrentPage] = useState(1);
 
   const numberOfPages = Math.ceil(products.length / itemsPerPage);

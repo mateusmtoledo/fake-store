@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import ItemList from '../ItemList';
 import { itemsPerPage } from '../ItemList';
 import products from '../../fakeData/products.json';
+import { CartContext } from '../../contexts/CartContext';
 
 jest.mock('../Card', () => ({ item }) => (
   <div data-testid={item.id}>{'This is a card mock'}</div>
@@ -13,26 +14,42 @@ const numberOfPages = Math.ceil(products.length / itemsPerPage);
 
 describe('ItemList', () => {
   it('renders limited amount of items at a time', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const displayedItems = screen.getAllByText('This is a card mock');
     expect(displayedItems.length).toBe(itemsPerPage);
   });
 
   it('initially renders first page', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     for (let i = 1; i <= itemsPerPage; i += 1) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
     }
   });
 
   it('renders next page button', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const nextPageButton = screen.getByText('>');
     expect(nextPageButton).toBeInTheDocument();
   });
 
   it('renders previous page button', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const previousPageButton = screen.getByText('<');
     expect(previousPageButton).toBeInTheDocument();
   });
@@ -40,7 +57,11 @@ describe('ItemList', () => {
 
 describe('page number display', () => {
   it('correctly displays page numbers', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const pageNumberDisplay = screen.getByText(/page/i);
     const nextPageButton = screen.getByText('>');
     expect(pageNumberDisplay).toHaveTextContent(`Page 1 of ${numberOfPages}`);
@@ -51,7 +72,11 @@ describe('page number display', () => {
 
 describe('next page button', () => {
   it('renders next page when clicked', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const nextPageButton = screen.getByText('>');
     for (let i = 1; i <= itemsPerPage; i += 1) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
@@ -67,7 +92,11 @@ describe('next page button', () => {
   });
 
   it('does not go further than last page', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const nextPageButton = screen.getByText('>');
     for (let i = 1; i <= numberOfPages; i += 1) {
       userEvent.click(nextPageButton);
@@ -88,7 +117,11 @@ describe('next page button', () => {
 
 describe('previous page button', () => {
   it('renders previous page when clicked', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const previousPageButton = screen.getByText('<');
     const nextPageButton = screen.getByText('>');
     userEvent.click(nextPageButton);
@@ -99,7 +132,11 @@ describe('previous page button', () => {
   });
 
   it('does not go below first page', () => {
-    render(<ItemList products={products} />);
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList products={products} />
+      </CartContext.Provider>,
+    );
     const previousPageButton = screen.getByText('<');
     userEvent.click(previousPageButton);
     userEvent.click(previousPageButton);

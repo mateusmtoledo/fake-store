@@ -1,8 +1,13 @@
 import styles from './styles/Header.module.css';
 import { Link } from 'react-router-dom';
 import cartIcon from '../icons/cart.svg';
+import { useContext } from 'react';
+import { CartContext } from '../contexts/CartContext';
 
-function Header({ numberOfCartItems }) {
+function Header() {
+  const { cart } = useContext(CartContext);
+  const numberOfCartItems = cart.length;
+
   return (
     <header className={styles.header}>
       <Link to="/">
