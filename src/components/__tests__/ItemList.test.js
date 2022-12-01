@@ -5,14 +5,23 @@ import ItemList from '../ItemList';
 import { itemsPerPage } from '../ItemList';
 import mockProducts from '../../fakeData/products.json';
 import { CartContext } from '../../contexts/CartContext';
+import * as useProducts from '../../hooks/useProducts';
+
+jest.mock('../../hooks/useProducts', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}));
+
+beforeEach(() => {
+  useProducts.default.mockReturnValue({
+    products: mockProducts,
+    productsLoading: false,
+  });
+});
 
 jest.mock('../Card', () => ({ item }) => (
   <div data-testid={item.id}>{'This is a card mock'}</div>
 ));
-
-jest.mock('../../hooks/useProducts', () => () => ({
-  products: mockProducts,
-}));
 
 const numberOfPages = Math.ceil(mockProducts.length / itemsPerPage);
 
@@ -136,5 +145,21 @@ describe('previous page button', () => {
     expect(
       screen.queryByTitle(/navigate to previous page/i),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe('ItemList skeleton', () => {
+  it('is displayed when content is loading', async () => {
+    useProducts.default.mockReturnValue({
+      products: [],
+      productsLoading: true,
+    });
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ItemList />
+      </CartContext.Provider>,
+    );
+    const cardSkeletons = await screen.findAllByTestId('card-skeleton');
+    expect(cardSkeletons.length).toBe(9);
   });
 });

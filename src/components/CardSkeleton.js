@@ -5,7 +5,7 @@ import styles from './styles/Card.module.css';
 export default function CardSkeleton() {
   return (
     <SkeletonTheme>
-      <div className={styles.card}>
+      <div className={styles.card} data-testid="card-skeleton">
         <div className={styles.upper}>
           <Skeleton height={96} width={96} borderRadius={12} />
           <h3>
