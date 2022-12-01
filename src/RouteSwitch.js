@@ -1,22 +1,13 @@
-import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Cart from './components/Cart';
 import ItemList from './components/ItemList';
 import Home from './components/Home';
 import useCart from './hooks/useCart';
+import useProducts from './hooks/useProducts';
 
 function RouteSwitch() {
-  const [itemArray, setItemArray] = useState([]);
-
-  useEffect(() => {
-    async function fetchItems() {
-      const reponse = await fetch('https://fakestoreapi.com/products');
-      const json = await reponse.json();
-      setItemArray(json);
-    }
-    fetchItems();
-  });
+  const { products } = useProducts();
 
   const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
 
@@ -26,7 +17,7 @@ function RouteSwitch() {
         <Route path="/" element={<App numberOfCartItems={cart.length} />}>
           <Route
             path="shop"
-            element={<ItemList itemArray={itemArray} addToCart={addToCart} />}
+            element={<ItemList products={products} addToCart={addToCart} />}
           />
           <Route
             path="cart"

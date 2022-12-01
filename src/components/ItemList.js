@@ -4,10 +4,10 @@ import styles from './styles/ItemList.module.css';
 
 export const itemsPerPage = 12;
 
-function ItemList({ itemArray, addToCart }) {
+function ItemList({ products, addToCart }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const numberOfPages = Math.ceil(itemArray.length / itemsPerPage);
+  const numberOfPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = itemsPerPage * (currentPage - 1);
   const endIndex = itemsPerPage * currentPage;
 
@@ -24,7 +24,7 @@ function ItemList({ itemArray, addToCart }) {
   return (
     <div className={styles.itemList}>
       <div className={styles.products}>
-        {itemArray.slice(startIndex, endIndex).map((item) => (
+        {products.slice(startIndex, endIndex).map((item) => (
           <Card key={item.id} item={item} addToCart={addToCart} />
         ))}
       </div>
