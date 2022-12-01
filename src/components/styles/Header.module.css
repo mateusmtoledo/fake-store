@@ -15,6 +15,7 @@
 
 .header h1 {
   font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
 }
 
 .header nav {
@@ -44,7 +45,7 @@
   bottom: 0;
   right: -8px;
   border-radius: 32px;
-  background-color: #2E8B57EE;
+  background-color: #2e8b57ee;
   color: white;
   border: 1px solid black;
   font-size: 0.7rem;
