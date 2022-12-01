@@ -4,6 +4,8 @@ import useProducts from '../hooks/useProducts';
 import Card from './Card';
 import CardSkeleton from './CardSkeleton';
 import styles from './styles/ItemList.module.css';
+import { ReactComponent as NavigateNextIcon } from '../images/navigate-next.svg';
+import { ReactComponent as NavigateBeforeIcon } from '../images/navigate-before.svg';
 
 export const itemsPerPage = 12;
 
@@ -46,15 +48,27 @@ export default function ItemList() {
         ))}
       </div>
       <div className={styles.navigation}>
-        <button type="button" onClick={previousPage}>
-          {'<'}
-        </button>
+        {currentPage > 1 && (
+          <button
+            title="Navigate to previous page"
+            type="button"
+            onClick={previousPage}
+          >
+            <NavigateBeforeIcon className={styles.navigationIcon} />
+          </button>
+        )}
         <p>
           Page {currentPage} of {numberOfPages}
         </p>
-        <button type="button" onClick={nextPage}>
-          {'>'}
-        </button>
+        {currentPage < numberOfPages && (
+          <button
+            title="Navigate to next page"
+            type="button"
+            onClick={nextPage}
+          >
+            <NavigateNextIcon className={styles.navigationIcon} />
+          </button>
+        )}
       </div>
     </div>
   );

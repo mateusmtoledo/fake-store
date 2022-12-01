@@ -44,7 +44,7 @@ describe('ItemList', () => {
         <ItemList />
       </CartContext.Provider>,
     );
-    const nextPageButton = screen.getByText('>');
+    const nextPageButton = screen.getByTitle(/navigate to next page/i);
     expect(nextPageButton).toBeInTheDocument();
   });
 
@@ -54,7 +54,8 @@ describe('ItemList', () => {
         <ItemList />
       </CartContext.Provider>,
     );
-    const previousPageButton = screen.getByText('<');
+    userEvent.click(screen.getByTitle(/navigate to next page/i));
+    const previousPageButton = screen.getByTitle(/navigate to previous page/i);
     expect(previousPageButton).toBeInTheDocument();
   });
 });
@@ -67,7 +68,7 @@ describe('page number display', () => {
       </CartContext.Provider>,
     );
     const pageNumberDisplay = screen.getByText(/page/i);
-    const nextPageButton = screen.getByText('>');
+    const nextPageButton = screen.getByTitle(/navigate to next page/i);
     expect(pageNumberDisplay).toHaveTextContent(`Page 1 of ${numberOfPages}`);
     userEvent.click(nextPageButton);
     expect(pageNumberDisplay).toHaveTextContent(`Page 2 of ${numberOfPages}`);
@@ -81,7 +82,7 @@ describe('next page button', () => {
         <ItemList />
       </CartContext.Provider>,
     );
-    const nextPageButton = screen.getByText('>');
+    const nextPageButton = screen.getByTitle(/navigate to next page/i);
     for (let i = 1; i <= itemsPerPage; i += 1) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
     }
@@ -95,27 +96,17 @@ describe('next page button', () => {
     }
   });
 
-  it('does not go further than last page', () => {
+  it('is not displayed at the last page', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
         <ItemList />
       </CartContext.Provider>,
     );
-    const nextPageButton = screen.getByText('>');
-    for (let i = 1; i <= numberOfPages; i += 1) {
-      userEvent.click(nextPageButton);
-    }
-    const expectedStartIndex = itemsPerPage * (numberOfPages - 1) + 1;
-    const expectedEndIndex = Math.min(
-      itemsPerPage * numberOfPages,
-      mockProducts.length,
-    );
-    for (let i = expectedStartIndex; i < expectedEndIndex; i += 1) {
-      expect(screen.getByTestId(i)).toBeInTheDocument();
-    }
-    expect(screen.getByText(/page/i)).toHaveTextContent(
-      `Page ${numberOfPages} of ${numberOfPages}`,
-    );
+    userEvent.click(screen.getByTitle(/navigate to next page/i));
+    expect(screen.getByText('Page 2 of 2')).toBeInTheDocument();
+    expect(
+      screen.queryByTitle(/navigate to next page/i),
+    ).not.toBeInTheDocument();
   });
 });
 
@@ -126,29 +117,24 @@ describe('previous page button', () => {
         <ItemList />
       </CartContext.Provider>,
     );
-    const previousPageButton = screen.getByText('<');
-    const nextPageButton = screen.getByText('>');
+    const nextPageButton = screen.getByTitle(/navigate to next page/i);
     userEvent.click(nextPageButton);
+    const previousPageButton = screen.getByTitle(/navigate to previous page/i);
     userEvent.click(previousPageButton);
     for (let i = 1; i <= itemsPerPage; i += 1) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
     }
   });
 
-  it('does not go below first page', () => {
+  it('is not displayed at the first page', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
         <ItemList />
       </CartContext.Provider>,
     );
-    const previousPageButton = screen.getByText('<');
-    userEvent.click(previousPageButton);
-    userEvent.click(previousPageButton);
-    for (let i = 1; i <= itemsPerPage; i += 1) {
-      expect(screen.getByTestId(i)).toBeInTheDocument();
-    }
-    expect(screen.getByText(/page/i)).toHaveTextContent(
-      `Page 1 of ${numberOfPages}`,
-    );
+    expect(screen.getByText('Page 1 of 2')).toBeInTheDocument();
+    expect(
+      screen.queryByTitle(/navigate to previous page/i),
+    ).not.toBeInTheDocument();
   });
 });
