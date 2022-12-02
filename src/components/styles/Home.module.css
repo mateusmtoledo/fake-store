@@ -1,3 +1,7 @@
+.home {
+  flex: 1;
+}
+
 .hero {
   height: min-content;
   background-color: white;
@@ -88,7 +92,8 @@
     top: 14%;
   }
 
-  .heroText p:nth-child(1), .heroText p:nth-child(3) {
+  .heroText p:nth-child(1),
+  .heroText p:nth-child(3) {
     right: 0;
     left: 0;
   }
