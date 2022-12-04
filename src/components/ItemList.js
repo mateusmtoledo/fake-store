@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import useProducts from '../hooks/useProducts';
 import Card from './Card';
@@ -6,10 +6,10 @@ import CardSkeleton from './Skeletons/CardSkeleton';
 import styles from './styles/ItemList.module.css';
 import { ReactComponent as NavigateNextIcon } from '../images/navigate-next.svg';
 import { ReactComponent as NavigateBeforeIcon } from '../images/navigate-before.svg';
-import Filters, { priceRanges } from './Filters';
-import { filterByCategories, filterByPriceRange } from '../utils/filterUtils';
+import Filters from './Filters';
 import FiltersSkeleton from './Skeletons/FiltersSkeleton';
 import usePages from '../hooks/usePages';
+import useFilters from '../hooks/useFilters';
 
 export const itemsPerPage = 12;
 
@@ -17,15 +17,13 @@ export default function ItemList() {
   const { products, productsLoading } = useProducts();
   const { addToCart } = useContext(CartContext);
 
-  const [categoriesFilter, setCategoriesFilter] = useState(null);
-  const [priceRangeIndex, setPriceRangeIndex] = useState(null);
-  const priceRange =
-    priceRangeIndex === null ? null : priceRanges[priceRangeIndex];
-
-  const filteredProducts = filterByPriceRange(
-    filterByCategories(products, categoriesFilter),
-    priceRange,
-  );
+  const {
+    filteredProducts,
+    categoriesFilter,
+    setCategoriesFilter,
+    priceRangeIndex,
+    setPriceRangeIndex,
+  } = useFilters(products);
 
   const {
     paginatedProducts,
