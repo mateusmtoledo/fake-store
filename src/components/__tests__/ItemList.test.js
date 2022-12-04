@@ -160,6 +160,6 @@ describe('ItemList skeleton', () => {
       </CartContext.Provider>,
     );
     const cardSkeletons = await screen.findAllByTestId('card-skeleton');
-    expect(cardSkeletons.length).toBe(9);
+    expect(cardSkeletons.length).toBe(12);
   });
 });

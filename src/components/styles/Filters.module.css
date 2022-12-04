@@ -1,0 +1,85 @@
+.filtersContainer {
+  padding: 16px;
+  width: 220px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.filtersContainer h2 {
+  margin-bottom: 16px;
+}
+
+.filtersContainer h3 {
+  margin: 16px 0 16px;
+}
+
+.filtersContainer ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  /* gap: 16px; */
+}
+
+.filtersContainer button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+  text-align: start;
+  border-radius: 8px;
+  position: relative;
+  padding: 8px 0;
+  z-index: 1;
+}
+
+.filtersContainer button:hover::before {
+  content: '';
+  background-color: #eeeeee;
+  position: absolute;
+  top: 0;
+  left: -16px;
+  width: calc(100% + 32px);
+  height: 100%;
+  z-index: -1;
+}
+
+.filtersContainer .selected {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.filtersContainer button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -16px;
+  width: calc(100% + 32px);
+  height: 100%;
+  z-index: -1;
+}
+
+.filtersContainer button.selected::before {
+  background-color: #393e46;
+}
+
+.filtersContainer button::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+}
+
+.filtersContainer .selected::after {
+  content: '';
+  background: url('../../images/x.svg');
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 16px;
+  height: 16px;
+  z-index: -1;
+}
