@@ -9,7 +9,7 @@ const props = {
   categoriesFilter: [],
   setCategoriesFilter: jest.fn(),
   setPriceRangeIndex: jest.fn(),
-  setCurrentPage: jest.fn(),
+  goToFirstPage: jest.fn(),
 };
 
 describe('Filters', () => {
@@ -41,7 +41,7 @@ describe('Filters', () => {
     it('calls setCurrentPage with 1', () => {
       render(<Filters {...props} />);
       userEvent.click(screen.getByText("men's clothing (4)"));
-      expect(props.setCurrentPage).toBeCalledWith(1);
+      expect(props.goToFirstPage).toBeCalled();
     });
 
     describe('if category is already selected', () => {
@@ -63,7 +63,7 @@ describe('Filters', () => {
     it('calls setCurrentPage with 1', () => {
       render(<Filters {...props} />);
       userEvent.click(screen.getByText('$50 to $100'));
-      expect(props.setCurrentPage).toBeCalledWith(1);
+      expect(props.goToFirstPage).toBeCalled();
     });
 
     describe('if price range is already selected', () => {

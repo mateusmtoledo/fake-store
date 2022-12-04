@@ -19,7 +19,7 @@ export default function Filters({
   setCategoriesFilter,
   priceRangeIndex,
   setPriceRangeIndex,
-  setCurrentPage,
+  goToFirstPage,
 }) {
   const categoryAppearances = {};
   products
@@ -30,7 +30,7 @@ export default function Filters({
     });
 
   function handleCategoryChange(e) {
-    setCurrentPage(1);
+    goToFirstPage();
     if (categoriesFilter === e.target.dataset.category) {
       setCategoriesFilter(null);
     } else {
@@ -39,7 +39,7 @@ export default function Filters({
   }
 
   function handlePriceRangeChange(e) {
-    setCurrentPage(1);
+    goToFirstPage();
     const elementIndex = Number(e.target.dataset.index);
     if (priceRangeIndex === elementIndex) {
       setPriceRangeIndex(null);

@@ -46,6 +46,10 @@ describe('filterByCategoryArray', () => {
       ),
     ).toBe(true);
   });
+
+  it('throws error when categories argument is not string or array', () => {
+    expect(() => filterByCategories(products, undefined)).toThrowError();
+  });
 });
 
 describe('filterByPriceRange', () => {
