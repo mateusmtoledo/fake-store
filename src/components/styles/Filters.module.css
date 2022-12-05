@@ -10,14 +10,13 @@
 }
 
 .filtersContainer h3 {
-  margin: 16px 0 16px;
+  margin: 16px 0 4px;
 }
 
 .filtersContainer ul {
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  /* gap: 16px; */
 }
 
 .filtersContainer button {

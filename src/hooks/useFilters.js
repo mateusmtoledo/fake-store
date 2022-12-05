@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { priceRanges } from '../components/Filters';
 import { filterByCategories, filterByPriceRange } from '../utils/filterUtils';
 
@@ -25,9 +24,11 @@ class FilterChain {
   }
 }
 
-export default function useFilters(products) {
-  const [categoriesFilter, setCategoriesFilter] = useState(null);
-  const [priceRangeIndex, setPriceRangeIndex] = useState(null);
+export default function useFilters(
+  products,
+  categoriesFilter,
+  priceRangeIndex,
+) {
   const priceRange =
     priceRangeIndex === null ? null : priceRanges[priceRangeIndex];
   const { filteredProducts } = new FilterChain(products)
@@ -37,8 +38,6 @@ export default function useFilters(products) {
   return {
     filteredProducts,
     categoriesFilter,
-    setCategoriesFilter,
     priceRangeIndex,
-    setPriceRangeIndex,
   };
 }

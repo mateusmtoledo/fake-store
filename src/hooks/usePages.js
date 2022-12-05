@@ -28,5 +28,7 @@ export default function usePages(products, productsPerPage) {
     goToNextPage,
     goToPreviousPage,
     goToFirstPage,
+    firstProductNumber: Math.min(products.length, startIndex + 1),
+    lastProductNumber: Math.min(products.length, endIndex),
   };
 }
