@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-export default function usePages(products, itemsPerPage) {
+export default function usePages(products, productsPerPage) {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
-  const numberOfPages = Math.ceil(products.length / itemsPerPage) || 1;
-  const startIndex = itemsPerPage * (currentPageNumber - 1);
-  const endIndex = itemsPerPage * currentPageNumber;
+  const numberOfPages = Math.ceil(products.length / productsPerPage) || 1;
+  const startIndex = productsPerPage * (currentPageNumber - 1);
+  const endIndex = productsPerPage * currentPageNumber;
 
   function goToNextPage() {
     setCurrentPageNumber((prev) => Math.min(numberOfPages, prev + 1));

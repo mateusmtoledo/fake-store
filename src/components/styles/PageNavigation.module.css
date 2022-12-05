@@ -1,0 +1,15 @@
+.navigation {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.navigation button {
+  border: none;
+  background: none;
+  height: 24px;
+}
+
+.navigationIcon:hover {
+  stroke: black;
+}

@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import shoppingImage from '../images/shopping.svg';
-import styles from './styles/Home.module.css';
+import styles from './styles/HomePage.module.css';
 import productVarietyImage from '../images/product-variety.svg';
 import paymentMethodsImage from '../images/payment-methods.svg';
 
-function Home() {
+export default function HomePage() {
   return (
     <div className={styles.home}>
       <div className={styles.hero}>
@@ -47,5 +47,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

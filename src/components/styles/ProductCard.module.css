@@ -30,7 +30,7 @@
   object-fit: scale-down;
 }
 
-.itemInfo {
+.productInfo {
   display: flex;
   justify-content: space-between;
 }
@@ -55,8 +55,8 @@
 .card button {
   width: 100%;
   padding: 8px;
-  background-color: #393E46;
+  background-color: #393e46;
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 0;
 }

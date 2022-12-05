@@ -8,7 +8,7 @@ export default function FiltersSkeleton() {
       <h2>Filters</h2>
       <h3>Category</h3>
       <ul>
-        {new Array(4).fill().map((_, i) => (
+        {new Array(3).fill().map((_, i) => (
           <li key={i}>
             <button type="button">
               <Skeleton width={150} height={16} />

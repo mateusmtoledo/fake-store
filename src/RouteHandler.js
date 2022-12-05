@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Cart from './components/Cart';
-import ItemList from './components/ItemList';
-import Home from './components/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ProductListPage from './components/ProductListPage';
+import CartPage from './components/CartPage';
+import HomePage from './components/HomePage';
 
 export default function RouteHandler() {
   return (
@@ -11,9 +11,9 @@ export default function RouteHandler() {
       <Header />
       <main>
         <Routes>
-          <Route path="shop" element={<ItemList />} />
-          <Route path="cart" element={<Cart />} />
-          <Route index element={<Home />} />
+          <Route path="shop" element={<ProductListPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route index element={<HomePage />} />
         </Routes>
       </main>
       <Footer />

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import Home from '../Home';
+import Home from '../HomePage';
 
 describe('Home', () => {
   it('renders hero section', () => {

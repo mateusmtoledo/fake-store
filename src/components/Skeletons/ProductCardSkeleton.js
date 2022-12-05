@@ -1,8 +1,8 @@
 import 'react-loading-skeleton/dist/skeleton.css';
 import Skeleton from 'react-loading-skeleton';
-import styles from '../styles/Card.module.css';
+import styles from '../styles/ProductCard.module.css';
 
-export default function CardSkeleton() {
+export default function ProductCardSkeleton() {
   return (
     <div className={styles.card} data-testid="card-skeleton">
       <div className={styles.upper}>
@@ -12,7 +12,7 @@ export default function CardSkeleton() {
         </h3>
       </div>
       <div className={styles.lower}>
-        <div className={styles.itemInfo}>
+        <div className={styles.productInfo}>
           <div>
             <div>
               <Skeleton width={80} height={19} />

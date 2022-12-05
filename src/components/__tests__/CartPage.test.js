@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Cart from '../Cart';
+import CartPage from '../CartPage';
 import { MemoryRouter } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 
@@ -21,7 +21,7 @@ describe('cart', () => {
         value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
       >
         <MemoryRouter>
-          <Cart cart={cart} />
+          <CartPage cart={cart} />
         </MemoryRouter>
       </CartContext.Provider>,
     );
@@ -35,7 +35,7 @@ describe('cart', () => {
         value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
       >
         <MemoryRouter>
-          <Cart cart={cart} />
+          <CartPage cart={cart} />
         </MemoryRouter>
       </CartContext.Provider>,
     );
@@ -50,7 +50,7 @@ describe('cart', () => {
         value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
       >
         <MemoryRouter>
-          <Cart cart={cart} />
+          <CartPage cart={cart} />
         </MemoryRouter>
       </CartContext.Provider>,
     );
@@ -64,7 +64,7 @@ describe('cart', () => {
         value={{ cart: cart, addToCard: jest.fn(), removeFromCart: jest.fn() }}
       >
         <MemoryRouter>
-          <Cart cart={cart} />
+          <CartPage cart={cart} />
         </MemoryRouter>
       </CartContext.Provider>,
     );
@@ -78,7 +78,7 @@ describe('cart', () => {
         value={{ cart: [], addToCard: jest.fn(), removeFromCart: jest.fn() }}
       >
         <MemoryRouter>
-          <Cart cart={cart} />
+          <CartPage cart={cart} />
         </MemoryRouter>
       </CartContext.Provider>,
     );

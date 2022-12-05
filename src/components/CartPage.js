@@ -1,11 +1,11 @@
 import CartItem from './CartItem';
 import { Link } from 'react-router-dom';
-import styles from './styles/Cart.module.css';
+import styles from './styles/CartPage.module.css';
 import emptyCartImage from '../images/empty-cart.svg';
 import { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 
-function Cart() {
+export default function CartPage() {
   const { cart, updateQuantity, removeFromCart } = useContext(CartContext);
 
   function calculateTotal() {
@@ -59,5 +59,3 @@ function Cart() {
     </div>
   );
 }
-
-export default Cart;
