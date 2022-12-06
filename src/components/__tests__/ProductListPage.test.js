@@ -41,7 +41,11 @@ describe('ItemList', () => {
         <ProductListPage />
       </CartContext.Provider>,
     );
-    for (let i = 1; i <= productsPerPage; i += 1) {
+    for (
+      let i = mockProducts.length;
+      i <= mockProducts.length - productsPerPage;
+      i += 1
+    ) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
     }
   });
@@ -91,13 +95,17 @@ describe('next page button', () => {
       </CartContext.Provider>,
     );
     const nextPageButton = screen.getByTitle(/navigate to next page/i);
-    for (let i = 1; i <= productsPerPage; i += 1) {
+    for (
+      let i = mockProducts.length;
+      i <= mockProducts.length - productsPerPage;
+      i += 1
+    ) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
     }
     userEvent.click(nextPageButton);
     for (
-      let i = productsPerPage + 1;
-      i < Math.min(productsPerPage * 2, mockProducts.length);
+      let i = mockProducts.length - productsPerPage + 1;
+      i < Math.max(mockProducts.length - 2 * productsPerPage, 1);
       i += 1
     ) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
@@ -129,7 +137,11 @@ describe('previous page button', () => {
     userEvent.click(nextPageButton);
     const previousPageButton = screen.getByTitle(/navigate to previous page/i);
     userEvent.click(previousPageButton);
-    for (let i = 1; i <= productsPerPage; i += 1) {
+    for (
+      let i = mockProducts.length;
+      i <= mockProducts.length - productsPerPage;
+      i += 1
+    ) {
       expect(screen.getByTestId(i)).toBeInTheDocument();
     }
   });

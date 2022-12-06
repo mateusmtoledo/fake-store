@@ -15,10 +15,10 @@ const props = {
 describe('Filters', () => {
   it('renders list of categories', () => {
     render(<Filters {...props} />);
-    expect(screen.getByText("men's clothing (4)")).toBeInTheDocument();
-    expect(screen.getByText('jewelery (4)')).toBeInTheDocument();
-    expect(screen.getByText('electronics (6)')).toBeInTheDocument();
-    expect(screen.getByText("women's clothing (6)")).toBeInTheDocument();
+    expect(screen.getByText("Men's clothing")).toBeInTheDocument();
+    expect(screen.getByText('Jewelery')).toBeInTheDocument();
+    expect(screen.getByText('Electronics')).toBeInTheDocument();
+    expect(screen.getByText("Women's clothing")).toBeInTheDocument();
   });
 
   it('renders price range filters', () => {
@@ -34,20 +34,20 @@ describe('Filters', () => {
   describe('when a category is clicked', () => {
     it('calls setCategoriesFilter with correct arguments', () => {
       render(<Filters {...props} />);
-      userEvent.click(screen.getByText("men's clothing (4)"));
+      userEvent.click(screen.getByText("Men's clothing"));
       expect(props.setCategoriesFilter).toBeCalledWith("men's clothing");
     });
 
     it('calls setCurrentPage with 1', () => {
       render(<Filters {...props} />);
-      userEvent.click(screen.getByText("men's clothing (4)"));
+      userEvent.click(screen.getByText("Men's clothing"));
       expect(props.goToFirstPage).toBeCalled();
     });
 
     describe('if category is already selected', () => {
       it('calls setCategoriesFilter with null', () => {
         render(<Filters {...props} categoriesFilter="men's clothing" />);
-        userEvent.click(screen.getByText("men's clothing (4)"));
+        userEvent.click(screen.getByText("Men's clothing"));
         expect(props.setCategoriesFilter).toBeCalledWith(null);
       });
     });

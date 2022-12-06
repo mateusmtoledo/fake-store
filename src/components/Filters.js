@@ -1,3 +1,4 @@
+import { capitalizeString } from '../utils/stringUtils';
 import styles from './styles/Filters.module.css';
 
 function minmaxFactory(min, max) {
@@ -21,13 +22,12 @@ export default function Filters({
   setPriceRangeIndex,
   goToFirstPage,
 }) {
-  const categoryAppearances = {};
-  products
-    .map((product) => product.category)
-    .forEach((category) => {
-      if (!categoryAppearances[category]) categoryAppearances[category] = 0;
-      categoryAppearances[category] += 1;
-    });
+  const categories = [
+    ...products.reduce((set, product) => {
+      set.add(product.category);
+      return set;
+    }, new Set()),
+  ];
 
   function handleCategoryChange(e) {
     goToFirstPage();
@@ -53,7 +53,7 @@ export default function Filters({
       <h2>Filters</h2>
       <h3>Category</h3>
       <ul>
-        {Object.keys(categoryAppearances).map((category) => (
+        {categories.map((category) => (
           <li key={category}>
             <button
               type="button"
@@ -61,7 +61,7 @@ export default function Filters({
               data-category={category}
               onClick={handleCategoryChange}
             >
-              {`${category} (${categoryAppearances[category]})`}
+              {capitalizeString(category)}
             </button>
           </li>
         ))}

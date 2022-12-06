@@ -25,7 +25,7 @@ export default function ProductListPage() {
     priceRangeIndex,
   );
 
-  const [sortBy, setSortBy] = useState('date+');
+  const [sortBy, setSortBy] = useState('date-');
   const { sortedProducts } = useSorting(filteredProducts, sortBy);
 
   const {
