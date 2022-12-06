@@ -58,8 +58,6 @@ export default function ProductListPage() {
     );
   }
 
-  // TODO no results message
-  // FIXME page number indicator placement
   return (
     <div className={styles.productListPage}>
       <div className={styles.upperBar}>

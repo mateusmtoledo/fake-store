@@ -11,7 +11,7 @@ export default function SortingSelect({ sortBy, setSortBy }) {
       value={sortBy}
       onChange={handleChange}
     >
-      <option value="date-">Newest</option>
+      <option value="date-">Latest</option>
       <option value="rating-">Best rated</option>
       <optgroup label="Price">
         <option value="price+">Price (⇑)</option>

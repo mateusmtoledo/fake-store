@@ -24,7 +24,7 @@ jest.mock('../ProductCard', () => ({ product }) => (
 
 const numberOfPages = Math.ceil(mockProducts.length / productsPerPage);
 
-describe('ItemList', () => {
+describe('ProductList', () => {
   it('renders limited amount of items at a time', () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
@@ -69,6 +69,19 @@ describe('ItemList', () => {
     userEvent.click(screen.getByTitle(/navigate to next page/i));
     const previousPageButton = screen.getByTitle(/navigate to previous page/i);
     expect(previousPageButton).toBeInTheDocument();
+  });
+
+  it('renders no results message when array length is 0', () => {
+    useProducts.default.mockReturnValue({
+      products: [],
+      productsLoading: false,
+    });
+    render(
+      <CartContext.Provider value={{ addToCard: jest.fn() }}>
+        <ProductListPage />
+      </CartContext.Provider>,
+    );
+    expect(screen.getByText(/no results found/i)).toBeInTheDocument();
   });
 });
 
