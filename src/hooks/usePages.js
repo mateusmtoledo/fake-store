@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export default function usePages(products, productsPerPage) {
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -15,9 +15,7 @@ export default function usePages(products, productsPerPage) {
     setCurrentPageNumber((prev) => Math.max(1, prev - 1));
   }
 
-  function goToFirstPage() {
-    setCurrentPageNumber(1);
-  }
+  const goToFirstPage = useCallback(() => setCurrentPageNumber(1), []);
 
   const paginatedProducts = products.slice(startIndex, endIndex);
 

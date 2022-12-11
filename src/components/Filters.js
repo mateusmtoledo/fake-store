@@ -16,11 +16,11 @@ export const priceRanges = [
 
 export default function Filters({
   products,
-  categoriesFilter,
-  setCategoriesFilter,
+  categoriesFilters,
+  addCategoryFilter,
+  deleteCategoryFilter,
   priceRangeIndex,
   setPriceRangeIndex,
-  goToFirstPage,
 }) {
   const categories = [
     ...products.reduce((set, product) => {
@@ -30,16 +30,15 @@ export default function Filters({
   ];
 
   function handleCategoryChange(e) {
-    goToFirstPage();
-    if (categoriesFilter === e.target.dataset.category) {
-      setCategoriesFilter(null);
+    const { category } = e.target.dataset;
+    if (categoriesFilters.has(category)) {
+      deleteCategoryFilter(category);
     } else {
-      setCategoriesFilter(e.target.dataset.category);
+      addCategoryFilter(category);
     }
   }
 
   function handlePriceRangeChange(e) {
-    goToFirstPage();
     const elementIndex = Number(e.target.dataset.index);
     if (priceRangeIndex === elementIndex) {
       setPriceRangeIndex(null);
@@ -57,7 +56,9 @@ export default function Filters({
           <li key={category}>
             <button
               type="button"
-              className={category === categoriesFilter ? styles.selected : null}
+              className={
+                categoriesFilters.has(category) ? styles.selected : null
+              }
               data-category={category}
               onClick={handleCategoryChange}
             >

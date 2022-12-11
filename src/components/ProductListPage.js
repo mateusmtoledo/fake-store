@@ -7,23 +7,31 @@ import useFilters from '../hooks/useFilters';
 import ProductList from './ProductList';
 import PageNavigation from './PageNavigation';
 import ProductListSkeleton from './Skeletons/ProductListSkeleton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSorting from '../hooks/useSorting';
 import Skeleton from 'react-loading-skeleton';
 import SortingSelect from './SortingSelect';
 
 export const productsPerPage = 12;
 
+// export function addCategoryToSet(prev, category) {
+//   return new Set([...prev, category]);
+// }
+
+// export function deleteCategoryFromSet(prev, category) {
+//   return new Set(prev).add(category);
+// }
+
 export default function ProductListPage() {
   const { products, productsLoading } = useProducts();
 
-  const [categoriesFilter, setCategoriesFilter] = useState(null);
   const [priceRangeIndex, setPriceRangeIndex] = useState(null);
-  const { filteredProducts } = useFilters(
-    products,
-    categoriesFilter,
-    priceRangeIndex,
-  );
+  const {
+    filteredProducts,
+    categoriesFilters,
+    addCategoryFilter,
+    deleteCategoryFilter,
+  } = useFilters(products, priceRangeIndex);
 
   const [sortBy, setSortBy] = useState('date-');
   const { sortedProducts } = useSorting(filteredProducts, sortBy);
@@ -38,6 +46,10 @@ export default function ProductListPage() {
     firstProductNumber,
     lastProductNumber,
   } = usePages(sortedProducts, productsPerPage);
+
+  useEffect(() => {
+    goToFirstPage();
+  }, [goToFirstPage, categoriesFilters, priceRangeIndex]);
 
   if (productsLoading) {
     return (
@@ -67,11 +79,11 @@ export default function ProductListPage() {
       <div className={styles.container}>
         <Filters
           products={products}
-          categoriesFilter={categoriesFilter}
-          setCategoriesFilter={setCategoriesFilter}
+          categoriesFilters={categoriesFilters}
+          addCategoryFilter={addCategoryFilter}
+          deleteCategoryFilter={deleteCategoryFilter}
           priceRangeIndex={priceRangeIndex}
           setPriceRangeIndex={setPriceRangeIndex}
-          goToFirstPage={goToFirstPage}
         />
         <div className={styles.productListContainer}>
           <ProductList products={paginatedProducts} />

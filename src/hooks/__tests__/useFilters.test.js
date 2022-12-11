@@ -1,22 +1,46 @@
 import { renderHook } from '@testing-library/react';
 import useFilters from '../useFilters';
 import products from '../../fakeData/products.json';
+import { act } from 'react-dom/test-utils';
 
 describe('useFilters', () => {
-  it('returns unchanged list of products when arguments are null', () => {
-    const { result } = renderHook(() => useFilters(products, null, null));
+  // it('returns unchanged list of products when set is empty', () => {
+  //   const { result } = renderHook(() => useFilters(products, null));
+  //   expect(result.current.filteredProducts).toMatchObject(products);
+  // });
+
+  // it('filters by category', () => {
+  //   const { result } = renderHook(() => useFilters(products, null));
+  //   expect(result.current.filteredProducts.length).toBe(4);
+  // });
+
+  it('initially returns original product array', () => {
+    const { result } = renderHook(() => useFilters(products, null));
     expect(result.current.filteredProducts).toMatchObject(products);
   });
 
-  it('filters by category', () => {
-    const { result } = renderHook(() =>
-      useFilters(products, "men's clothing", null),
-    );
-    expect(result.current.filteredProducts.length).toBe(4);
+  describe('addCategoryFilter', () => {
+    it('adds category to categoryFilters', () => {
+      const { result } = renderHook(() => useFilters(products, null));
+      act(() => result.current.addCategoryFilter("men's clothing"));
+      expect(result.current.categoriesFilters.has("men's clothing")).toBe(true);
+    });
+  });
+
+  describe('deleteCategoryFilter', () => {
+    it('deletes category from categoryFilters', () => {
+      const { result } = renderHook(() => useFilters(products, null));
+      act(() => result.current.addCategoryFilter("men's clothing"));
+      expect(result.current.categoriesFilters.has("men's clothing")).toBe(true);
+      act(() => result.current.deleteCategoryFilter("men's clothing"));
+      expect(result.current.categoriesFilters.has("men's clothing")).toBe(
+        false,
+      );
+    });
   });
 
   it('filters by price range', () => {
-    const { result } = renderHook(() => useFilters(products, null, 3));
+    const { result } = renderHook(() => useFilters(products, 3));
     expect(result.current.filteredProducts.length).toBe(3);
   });
 });

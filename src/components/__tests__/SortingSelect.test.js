@@ -9,7 +9,7 @@ describe('SortingSelect', () => {
   it('renders options', () => {
     render(<SortingSelect setSortBy={setSortBy} />);
     expect(screen.getByText(/best rated/i)).toHaveValue('rating-');
-    expect(screen.getByText(/newest/i)).toHaveValue('date-');
+    expect(screen.getByText(/latest/i)).toHaveValue('date-');
     expect(screen.getByText('Price (⇑)')).toHaveValue('price+');
     expect(screen.getByText('Price (⇓)')).toHaveValue('price-');
   });

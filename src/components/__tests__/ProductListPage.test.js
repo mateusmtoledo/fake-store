@@ -60,14 +60,16 @@ describe('ProductList', () => {
     expect(nextPageButton).toBeInTheDocument();
   });
 
-  it('renders previous page button', () => {
+  it('renders previous page button', async () => {
     render(
       <CartContext.Provider value={{ addToCard: jest.fn() }}>
         <ProductListPage />
       </CartContext.Provider>,
     );
     userEvent.click(screen.getByTitle(/navigate to next page/i));
-    const previousPageButton = screen.getByTitle(/navigate to previous page/i);
+    const previousPageButton = await screen.findByTitle(
+      /navigate to previous page/i,
+    );
     expect(previousPageButton).toBeInTheDocument();
   });
 

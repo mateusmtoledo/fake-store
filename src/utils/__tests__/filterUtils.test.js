@@ -2,18 +2,16 @@ import { filterByCategories, filterByPriceRange } from '../filterUtils';
 import products from '../../fakeData/products.json';
 
 describe('filterByCategoryArray', () => {
-  it('returns original array if categories argument is null', () => {
-    const filteredProducts = filterByCategories(products, null);
-    expect(filteredProducts.length).toBe(20);
-  });
-
-  it('returns original array if category array is empty', () => {
-    const filteredProducts = filterByCategories(products, []);
+  it('returns original array if categories set is empty', () => {
+    const filteredProducts = filterByCategories(products, new Set());
     expect(filteredProducts.length).toBe(20);
   });
 
   it('filters items by categories', () => {
-    const filteredProducts = filterByCategories(products, ["men's clothing"]);
+    const filteredProducts = filterByCategories(
+      products,
+      new Set(["men's clothing"]),
+    );
     expect(filteredProducts.length).toBe(4);
     expect(
       filteredProducts.every(
@@ -23,10 +21,10 @@ describe('filterByCategoryArray', () => {
   });
 
   it('filters by multiple categories', () => {
-    const filteredProducts = filterByCategories(products, [
-      "men's clothing",
-      "women's clothing",
-    ]);
+    const filteredProducts = filterByCategories(
+      products,
+      new Set(["men's clothing", "women's clothing"]),
+    );
     expect(filteredProducts.length).toBe(10);
     expect(
       filteredProducts.every(
@@ -38,7 +36,10 @@ describe('filterByCategoryArray', () => {
   });
 
   it('accepts single category as string', () => {
-    const filteredProducts = filterByCategories(products, "men's clothing");
+    const filteredProducts = filterByCategories(
+      products,
+      new Set(["men's clothing"]),
+    );
     expect(filteredProducts.length).toBe(4);
     expect(
       filteredProducts.every(
@@ -56,6 +57,12 @@ describe('filterByPriceRange', () => {
   it('returns original array if range argument is null', () => {
     const filteredProducts = filterByPriceRange(products, null);
     expect(filteredProducts.length).toBe(20);
+  });
+
+  it('throws error if priceRange in not null and has undefined min or max properties', () => {
+    expect(() =>
+      filterByPriceRange(products, { someProperty: 50, min: 10 }),
+    ).toThrowError();
   });
 
   it('filters by price range', () => {

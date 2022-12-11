@@ -6,10 +6,10 @@ import userEvent from '@testing-library/user-event';
 
 const props = {
   products,
-  categoriesFilter: [],
-  setCategoriesFilter: jest.fn(),
+  categoriesFilters: new Set(),
+  addCategoryFilter: jest.fn(),
+  deleteCategoryFilter: jest.fn(),
   setPriceRangeIndex: jest.fn(),
-  goToFirstPage: jest.fn(),
 };
 
 describe('Filters', () => {
@@ -35,20 +35,21 @@ describe('Filters', () => {
     it('calls setCategoriesFilter with correct arguments', () => {
       render(<Filters {...props} />);
       userEvent.click(screen.getByText("Men's clothing"));
-      expect(props.setCategoriesFilter).toBeCalledWith("men's clothing");
-    });
-
-    it('calls setCurrentPage with 1', () => {
-      render(<Filters {...props} />);
-      userEvent.click(screen.getByText("Men's clothing"));
-      expect(props.goToFirstPage).toBeCalled();
+      expect(props.addCategoryFilter).toBeCalledWith("men's clothing");
+      expect(props.deleteCategoryFilter).not.toBeCalled();
     });
 
     describe('if category is already selected', () => {
-      it('calls setCategoriesFilter with null', () => {
-        render(<Filters {...props} categoriesFilter="men's clothing" />);
-        userEvent.click(screen.getByText("Men's clothing"));
-        expect(props.setCategoriesFilter).toBeCalledWith(null);
+      it('calls deleteCategoriesFilter with correct arguments', () => {
+        render(
+          <Filters
+            {...props}
+            categoriesFilters={new Set(["men's clothing", "women's clothing"])}
+          />,
+        );
+        userEvent.click(screen.getByText("Women's clothing"));
+        expect(props.deleteCategoryFilter).toBeCalledWith("women's clothing");
+        expect(props.addCategoryFilter).not.toBeCalled();
       });
     });
   });
@@ -58,12 +59,6 @@ describe('Filters', () => {
       render(<Filters {...props} />);
       userEvent.click(screen.getByText('$50 to $100'));
       expect(props.setPriceRangeIndex).toBeCalledWith(3);
-    });
-
-    it('calls setCurrentPage with 1', () => {
-      render(<Filters {...props} />);
-      userEvent.click(screen.getByText('$50 to $100'));
-      expect(props.goToFirstPage).toBeCalled();
     });
 
     describe('if price range is already selected', () => {
