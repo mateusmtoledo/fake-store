@@ -5,7 +5,7 @@ function CartItem({ item, updateQuantity, removeFromCart }) {
   const { product, quantity } = item;
 
   function handleQuantityChange(event) {
-    updateQuantity(item.id, event.target.value);
+    updateQuantity(item.product.id, event.target.value);
   }
 
   return (
@@ -16,7 +16,7 @@ function CartItem({ item, updateQuantity, removeFromCart }) {
             className={styles.productImage}
             src={product.image}
             alt={product.title}
-          ></img>
+          />
         </div>
         <div className={styles.description}>
           <h3>{product.title}</h3>
