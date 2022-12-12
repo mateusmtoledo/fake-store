@@ -1,7 +1,13 @@
 import UserRating from './UserRating';
 import styles from './styles/ProductCard.module.css';
+import { useContext } from 'react';
+import { CartContext } from '../contexts/CartContext';
 
-export default function ProductCard({ product, addToCart }) {
+export default function ProductCard({ product }) {
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+
+  const isInCart = cart.some((item) => item.product.id === product.id);
+
   return (
     <div className={styles.card}>
       <div className={styles.upper}>
@@ -20,9 +26,18 @@ export default function ProductCard({ product, addToCart }) {
           />
           <p className={styles.price}>${product.price.toFixed(2)}</p>
         </div>
-        <button type="button" onClick={() => addToCart(product)}>
-          Add to cart
-        </button>
+        {isInCart ? (
+          <button
+            type="button"
+            onClick={() => removeFromCart(product.id)}
+            className={styles.isInCart}
+            aria-label="Remove from cart"
+          />
+        ) : (
+          <button type="button" onClick={() => addToCart(product)}>
+            Add to cart
+          </button>
+        )}
       </div>
     </div>
   );

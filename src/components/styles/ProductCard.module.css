@@ -59,4 +59,22 @@
   border: none;
   color: #ffffff;
   border-radius: 0;
+  transition: background-color 0.1s;
+  font-weight: 700;
+}
+
+.card button.isInCart {
+  background-color: #34b234;
+}
+
+.card button.isInCart::after {
+  content: 'Added to cart';
+}
+
+.card button.isInCart:hover {
+  background-color: #c91d1d;
+}
+
+.card button.isInCart:hover::after {
+  content: 'Remove from cart';
 }
