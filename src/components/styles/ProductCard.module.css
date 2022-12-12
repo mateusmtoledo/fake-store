@@ -53,6 +53,10 @@
 }
 
 .card button {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 8px;
   background-color: #393e46;
@@ -63,8 +67,26 @@
   font-weight: 700;
 }
 
+.card button::before {
+  content: '';
+  background-image: url('../../icons/add.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  height: 20px;
+  width: 20px;
+}
+
+.card button::after {
+  content: 'Add to cart';
+}
+
 .card button.isInCart {
   background-color: #34b234;
+}
+
+.card button.isInCart::before {
+  background-image: url('../../icons/check.svg');
 }
 
 .card button.isInCart::after {
@@ -73,6 +95,10 @@
 
 .card button.isInCart:hover {
   background-color: #c91d1d;
+}
+
+.card button.isInCart:hover::before {
+  background-image: url('../../icons/remove.svg');
 }
 
 .card button.isInCart:hover::after {

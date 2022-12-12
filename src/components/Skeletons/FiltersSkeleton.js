@@ -1,13 +1,13 @@
 import Skeleton from 'react-loading-skeleton';
 import styles from '../styles/Filters.module.css';
 import { priceRanges } from '../Filters';
-import FILTER_ICON from '../../images/filter.svg';
+import FILTER_ICON from '../../icons/filter.svg';
 
 export default function FiltersSkeleton() {
   return (
     <div className={styles.filtersContainer}>
       <div className={styles.filtersHeadingContainer}>
-        <img src={FILTER_ICON} alt="Filters" width="24px" height="24px" />
+        <img src={FILTER_ICON} alt="Filters" width="32px" height="32px" />
         <h2>Filters</h2>
       </div>
       <h3>Category</h3>

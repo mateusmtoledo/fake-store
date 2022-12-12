@@ -1,8 +1,8 @@
 import { capitalizeString } from '../utils/stringUtils';
 import styles from './styles/Filters.module.css';
-import FILTER_ICON from '../images/filter.svg';
+import FILTER_ICON from '../icons/filter.svg';
 import Modal from './Modal';
-import CLOSE_ICON from '../images/close.svg';
+import CLOSE_ICON from '../icons/close.svg';
 
 function minmaxFactory(min, max) {
   return { min, max };
@@ -75,7 +75,7 @@ export default function Filters({
     >
       <div className={styles.upper}>
         <div className={styles.filtersHeadingContainer}>
-          <img src={FILTER_ICON} alt="Filters" width="24px" height="24px" />
+          <img src={FILTER_ICON} alt="Filters" width="32px" height="32px" />
           <h2>Filters</h2>
         </div>
         {mobile && (

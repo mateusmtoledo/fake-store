@@ -1,7 +1,7 @@
 import styles from './styles/CartItem.module.css';
-import removeIcon from '../icons/remove.svg';
+import DELETE_ICON from '../icons/delete.svg';
 
-function CartItem({ item, updateQuantity, removeFromCart }) {
+export default function CartItem({ item, updateQuantity, removeFromCart }) {
   const { product, quantity } = item;
 
   function handleQuantityChange(event) {
@@ -40,7 +40,7 @@ function CartItem({ item, updateQuantity, removeFromCart }) {
           className={styles.removeFromCart}
           onClick={() => removeFromCart(item.product.id)}
         >
-          <img src={removeIcon} alt="Remove item from cart" />
+          <img src={DELETE_ICON} alt="Remove item from cart" />
           <p>Remove</p>
         </button>
       </div>
@@ -51,5 +51,3 @@ function CartItem({ item, updateQuantity, removeFromCart }) {
     </div>
   );
 }
-
-export default CartItem;

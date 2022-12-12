@@ -1,6 +1,6 @@
 import styles from './styles/PageNavigation.module.css';
-import { ReactComponent as NavigateNextIcon } from '../images/navigate-next.svg';
-import { ReactComponent as NavigateBeforeIcon } from '../images/navigate-before.svg';
+import { ReactComponent as NavigateNextIcon } from '../icons/navigate-next.svg';
+import { ReactComponent as NavigateBeforeIcon } from '../icons/navigate-before.svg';
 
 export default function PageNavigation({
   currentPageNumber,

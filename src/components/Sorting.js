@@ -1,5 +1,5 @@
 import styles from './styles/Sorting.module.css';
-import SORT_ICON from '../images/sort.svg';
+import SORT_ICON from '../icons/sort.svg';
 
 export default function Sorting({ sortBy, setSortBy }) {
   function handleChange(e) {

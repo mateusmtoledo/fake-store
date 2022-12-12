@@ -45,8 +45,9 @@
   bottom: 0;
   right: -8px;
   border-radius: 32px;
-  background-color: #2e8b57ee;
+  background-color: #393e46;
   color: white;
   border: 1px solid black;
-  font-size: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
 }

@@ -98,7 +98,7 @@
 
 .filtersContainer .selected::after {
   content: '';
-  background: url('../../images/x.svg');
+  background: url('../../icons/x.svg');
   background-size: cover;
   position: absolute;
   top: 50%;

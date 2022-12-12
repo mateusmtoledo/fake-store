@@ -80,7 +80,7 @@ describe('card', () => {
         <ProductCard {...props} />
       </CartContext.Provider>,
     );
-    expect(screen.getByText(/add to cart/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/add to cart/i)).toBeInTheDocument();
   });
 
   it('renders added to card button when item is in the cart', () => {

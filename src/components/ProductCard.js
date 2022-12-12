@@ -34,9 +34,11 @@ export default function ProductCard({ product }) {
             aria-label="Remove from cart"
           />
         ) : (
-          <button type="button" onClick={() => addToCart(product)}>
-            Add to cart
-          </button>
+          <button
+            type="button"
+            onClick={() => addToCart(product)}
+            aria-label="Add to cart"
+          />
         )}
       </div>
     </div>
