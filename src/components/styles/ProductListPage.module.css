@@ -22,8 +22,21 @@
   gap: 12px;
 }
 
+.sortAndFilterContainer {
+  display: flex;
+  gap: 8px;
+}
+
 .container {
   display: flex;
   align-items: flex-start;
   gap: 16px;
+}
+
+@media (max-width: 450px) {
+  .upperBar {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
 }

@@ -1,6 +1,8 @@
 import { capitalizeString } from '../utils/stringUtils';
 import styles from './styles/Filters.module.css';
 import FILTER_ICON from '../images/filter.svg';
+import Modal from './Modal';
+import CLOSE_ICON from '../images/close.svg';
 
 function minmaxFactory(min, max) {
   return { min, max };
@@ -15,6 +17,23 @@ export const priceRanges = [
   minmaxFactory(500, null),
 ];
 
+export function MobileFiltersButton({ setModalVisible }) {
+  return (
+    <button className={styles.openButton} onClick={() => setModalVisible(true)}>
+      <img src={FILTER_ICON} alt="Filters" width="16px" height="16px" />
+      <p>Filters</p>
+    </button>
+  );
+}
+
+export function MobileFiltersMenu({ setModalVisible, ...props }) {
+  return (
+    <Modal>
+      <Filters {...props} mobile setModalVisible={setModalVisible} />
+    </Modal>
+  );
+}
+
 export default function Filters({
   products,
   categoriesFilters,
@@ -22,6 +41,8 @@ export default function Filters({
   deleteCategoryFilter,
   priceRangeIndex,
   setPriceRangeIndex,
+  mobile,
+  setModalVisible,
 }) {
   const categories = [
     ...products.reduce((set, product) => {
@@ -49,10 +70,22 @@ export default function Filters({
   }
 
   return (
-    <div className={styles.filtersContainer}>
-      <div className={styles.filtersHeadingContainer}>
-        <img src={FILTER_ICON} alt="Filters" width="24px" height="24px" />
-        <h2>Filters</h2>
+    <div
+      className={styles.filtersContainer + ' ' + (mobile ? styles.mobile : '')}
+    >
+      <div className={styles.upper}>
+        <div className={styles.filtersHeadingContainer}>
+          <img src={FILTER_ICON} alt="Filters" width="24px" height="24px" />
+          <h2>Filters</h2>
+        </div>
+        {mobile && (
+          <button
+            id={styles.closeButton}
+            onClick={() => setModalVisible(false)}
+          >
+            <img src={CLOSE_ICON} alt="Close menu" width="32px" height="32px" />
+          </button>
+        )}
       </div>
       <h3>Category</h3>
       <ul>
@@ -61,7 +94,9 @@ export default function Filters({
             <button
               type="button"
               className={
-                categoriesFilters.has(category) ? styles.selected : null
+                styles.filterButton +
+                ' ' +
+                (categoriesFilters.has(category) ? styles.selected : '')
               }
               data-category={category}
               onClick={handleCategoryChange}
@@ -77,7 +112,11 @@ export default function Filters({
           <li key={i}>
             <button
               type="button"
-              className={priceRangeIndex === i ? styles.selected : null}
+              className={
+                styles.filterButton +
+                ' ' +
+                (priceRangeIndex === i ? styles.selected : '')
+              }
               data-index={i}
               onClick={handlePriceRangeChange}
             >

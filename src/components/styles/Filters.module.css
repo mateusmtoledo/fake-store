@@ -5,6 +5,36 @@
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
+.filtersContainer .upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filtersContainer.mobile {
+  height: 100vh;
+  width: 70vw;
+  max-width: 280px;
+}
+
+#closeButton {
+  flex: 0;
+}
+
+.openButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 2px;
+  padding: 0 8px;
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  box-sizing: content-box;
+}
+
 .filtersContainer h3 {
   margin: 16px 0 4px;
 }
@@ -28,7 +58,7 @@
   z-index: 1;
 }
 
-.filtersContainer button:hover::before {
+.filtersContainer .filterButton:hover::before {
   content: '';
   background-color: #eeeeee;
   position: absolute;
@@ -44,7 +74,7 @@
   font-weight: 700;
 }
 
-.filtersContainer button::before {
+.filtersContainer .filterButton::before {
   content: '';
   position: absolute;
   top: 0;
@@ -54,11 +84,11 @@
   z-index: -1;
 }
 
-.filtersContainer button.selected::before {
+.filtersContainer .filterButton.selected::before {
   background-color: #393e46;
 }
 
-.filtersContainer button::after {
+.filtersContainer .filterButton::after {
   content: '';
   position: absolute;
   right: 0;
@@ -83,5 +113,4 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-bottom: 16px;
 }

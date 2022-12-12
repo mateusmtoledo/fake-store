@@ -1,6 +1,6 @@
 import useProducts from '../hooks/useProducts';
 import styles from './styles/ProductListPage.module.css';
-import Filters from './Filters';
+import Filters, { MobileFiltersButton, MobileFiltersMenu } from './Filters';
 import FiltersSkeleton from './Skeletons/FiltersSkeleton';
 import usePages from '../hooks/usePages';
 import useFilters from '../hooks/useFilters';
@@ -10,17 +10,9 @@ import ProductListSkeleton from './Skeletons/ProductListSkeleton';
 import { useEffect, useState } from 'react';
 import useSorting from '../hooks/useSorting';
 import Skeleton from 'react-loading-skeleton';
-import SortingSelect from './SortingSelect';
+import Sorting from './Sorting';
 
 export const productsPerPage = 12;
-
-// export function addCategoryToSet(prev, category) {
-//   return new Set([...prev, category]);
-// }
-
-// export function deleteCategoryFromSet(prev, category) {
-//   return new Set(prev).add(category);
-// }
 
 export default function ProductListPage() {
   const { products, productsLoading } = useProducts();
@@ -47,9 +39,25 @@ export default function ProductListPage() {
     lastProductNumber,
   } = usePages(sortedProducts, productsPerPage);
 
+  const [mobileFilters, setMobileFilters] = useState(false);
+  useEffect(() => {
+    function resizeHandler() {
+      if (window.innerWidth <= 800 && !mobileFilters) {
+        setMobileFilters(true);
+      } else if (window.innerWidth > 800 && mobileFilters) {
+        setMobileFilters(false);
+      }
+    }
+    resizeHandler();
+    window.addEventListener('resize', resizeHandler);
+    return () => window.removeEventListener('resize', resizeHandler);
+  }, [mobileFilters]);
+
   useEffect(() => {
     goToFirstPage();
   }, [goToFirstPage, categoriesFilters, priceRangeIndex]);
+
+  const [filtersModalVisible, setFiltersModalVisible] = useState(false);
 
   if (productsLoading) {
     return (
@@ -61,7 +69,7 @@ export default function ProductListPage() {
           </p>
         </div>
         <div className={styles.container}>
-          <FiltersSkeleton />
+          {!mobileFilters && <FiltersSkeleton />}
           <div className={styles.productListContainer}>
             <ProductListSkeleton />
           </div>
@@ -72,19 +80,37 @@ export default function ProductListPage() {
 
   return (
     <div className={styles.productListPage}>
-      <div className={styles.upperBar}>
-        <SortingSelect sortBy={sortBy} setSortBy={setSortBy} />
-        <p>{`Showing ${firstProductNumber}-${lastProductNumber} of ${filteredProducts.length}`}</p>
-      </div>
-      <div className={styles.container}>
-        <Filters
+      {filtersModalVisible && (
+        <MobileFiltersMenu
           products={products}
           categoriesFilters={categoriesFilters}
           addCategoryFilter={addCategoryFilter}
           deleteCategoryFilter={deleteCategoryFilter}
           priceRangeIndex={priceRangeIndex}
           setPriceRangeIndex={setPriceRangeIndex}
+          setModalVisible={setFiltersModalVisible}
         />
+      )}
+      <div className={styles.upperBar}>
+        <div className={styles.sortAndFilterContainer}>
+          <Sorting sortBy={sortBy} setSortBy={setSortBy} />
+          {mobileFilters && (
+            <MobileFiltersButton setModalVisible={setFiltersModalVisible} />
+          )}
+        </div>
+        <p>{`Showing ${firstProductNumber}-${lastProductNumber} of ${filteredProducts.length}`}</p>
+      </div>
+      <div className={styles.container}>
+        {!mobileFilters && (
+          <Filters
+            products={products}
+            categoriesFilters={categoriesFilters}
+            addCategoryFilter={addCategoryFilter}
+            deleteCategoryFilter={deleteCategoryFilter}
+            priceRangeIndex={priceRangeIndex}
+            setPriceRangeIndex={setPriceRangeIndex}
+          />
+        )}
         <div className={styles.productListContainer}>
           <ProductList products={paginatedProducts} />
           <PageNavigation

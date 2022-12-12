@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import SortingSelect from '../SortingSelect';
+import Sorting from '../Sorting';
 import userEvent from '@testing-library/user-event';
 
 const setSortBy = jest.fn();
 
-describe('SortingSelect', () => {
+describe('Sorting', () => {
   it('renders options', () => {
-    render(<SortingSelect setSortBy={setSortBy} />);
+    render(<Sorting setSortBy={setSortBy} />);
     expect(screen.getByText(/best rated/i)).toHaveValue('rating-');
     expect(screen.getByText(/latest/i)).toHaveValue('date-');
     expect(screen.getByText('Price (⇑)')).toHaveValue('price+');
@@ -16,7 +16,7 @@ describe('SortingSelect', () => {
 
   describe('on change', () => {
     it('calls setSortBy with correct arguments', () => {
-      render(<SortingSelect setSortBy={setSortBy} />);
+      render(<Sorting setSortBy={setSortBy} />);
       userEvent.selectOptions(screen.getByRole('combobox'), ['date-']);
       expect(setSortBy).toBeCalledWith('date-');
     });
