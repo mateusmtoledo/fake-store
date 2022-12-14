@@ -7,7 +7,7 @@ import HomePage from './components/HomePage';
 
 export default function RouteHandler() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/fake-store">
       <Header />
       <main>
         <Routes>
