@@ -3,35 +3,5 @@ import Skeleton from 'react-loading-skeleton';
 import styles from '../styles/ProductCard.module.css';
 
 export default function ProductCardSkeleton() {
-  return (
-    <div className={styles.card} data-testid="card-skeleton">
-      <div className={styles.upper}>
-        <Skeleton height={96} width={96} borderRadius={0} />
-        <h3>
-          <Skeleton count={2} width={150} />
-        </h3>
-      </div>
-      <div className={styles.lower}>
-        <div className={styles.productInfo}>
-          <div>
-            <div>
-              <Skeleton width={80} height={19} />
-            </div>
-            <p>
-              <Skeleton width={60} height={16} />
-            </p>
-          </div>
-          <p className={styles.price}>
-            <Skeleton width={77} height={25} />
-          </p>
-        </div>
-        <Skeleton
-          height={31}
-          borderRadius={0}
-          highlightColor="#ffffff22"
-          baseColor="#393E46"
-        />
-      </div>
-    </div>
-  );
+  return <Skeleton width="100%" height="300px" className={styles.card} />;
 }

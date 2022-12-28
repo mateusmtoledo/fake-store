@@ -9,7 +9,7 @@ import PageNavigation from './PageNavigation';
 import ProductListSkeleton from './Skeletons/ProductListSkeleton';
 import { useEffect, useState } from 'react';
 import useSorting from '../hooks/useSorting';
-import Skeleton from 'react-loading-skeleton';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import Sorting from './Sorting';
 
 export const productsPerPage = 12;
@@ -61,20 +61,22 @@ export default function ProductListPage() {
 
   if (productsLoading) {
     return (
-      <div className={styles.productListPage}>
-        <div className={styles.upperBar}>
-          <Skeleton width={96} height={23} />
-          <p>
-            <Skeleton width={133} height={19} />
-          </p>
-        </div>
-        <div className={styles.container}>
-          {!mobileFilters && <FiltersSkeleton />}
-          <div className={styles.productListContainer}>
-            <ProductListSkeleton />
+      <SkeletonTheme borderRadius={0}>
+        <div className={styles.productListPage}>
+          <div className={styles.upperBar}>
+            <Skeleton width={96} height={23} />
+            <p>
+              <Skeleton width={133} height={19} />
+            </p>
+          </div>
+          <div className={styles.container}>
+            {!mobileFilters && <FiltersSkeleton />}
+            <div className={styles.productListContainer}>
+              <ProductListSkeleton />
+            </div>
           </div>
         </div>
-      </div>
+      </SkeletonTheme>
     );
   }
 
