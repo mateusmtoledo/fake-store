@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/fake-store/static/css/main.9db527be.css",
-    "main.js": "/fake-store/static/js/main.9d6a94f6.js",
+    "main.js": "/fake-store/static/js/main.b5182107.js",
     "static/media/Quicksand-VariableFont_wght.ttf": "/fake-store/static/media/Quicksand-VariableFont_wght.cf52df73d8529b4815ed.ttf",
     "static/media/Lato-Light.ttf": "/fake-store/static/media/Lato-Light.c7400fcad9e48ca9043f.ttf",
     "static/media/product-variety.svg": "/fake-store/static/media/product-variety.d6659d9d933c99e186a25541ac8ea5d1.svg",
@@ -25,10 +25,10 @@
     "static/media/navigate-before.svg": "/fake-store/static/media/navigate-before.42eed93072592f6d3d0777bb0f7ae3ff.svg",
     "static/media/full-star.svg": "/fake-store/static/media/full-star.c8379860cb80ba3a9e905feed47db41b.svg",
     "main.9db527be.css.map": "/fake-store/static/css/main.9db527be.css.map",
-    "main.9d6a94f6.js.map": "/fake-store/static/js/main.9d6a94f6.js.map"
+    "main.b5182107.js.map": "/fake-store/static/js/main.b5182107.js.map"
   },
   "entrypoints": [
     "static/css/main.9db527be.css",
-    "static/js/main.9d6a94f6.js"
+    "static/js/main.b5182107.js"
   ]
 }
