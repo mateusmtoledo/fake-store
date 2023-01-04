@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  A fake web store app built with React.
+  A store web app built with React.
 </p>
 
 <p align="center">
-  <img src="https://skills.thijs.gg/icons?i=js,react,css" alt="Built with JavaScript, React and CSS" />
+  <img src="https://skills.thijs.gg/icons?i=ts,react,css" alt="Built with TypeScript, React and CSS" />
 </p>
 
 <p align="center">
@@ -21,8 +21,8 @@
 ## Features
 
 - Product filtering and sorting
-- Cart page with order details
 - Client side routing with react-router-dom
+- Cart page with order details
 - Unit and integration tests with Jest and react-testing-library
 
 ## Setup
